@@ -2,10 +2,6 @@
 
 Sets up an IPython Notebook server using Chef.
 
-The default recipe simply installs (using system packages) IPython Notebook, numpy, Pandas, matplotlib, and all the dependencies for these.
-
-The `simple_launch` recipe creates user and group *ipynb*, creates a spot to store notebooks, and sets up ipython notebook as a service using supervisord.
-
 # Requirements
 
  * [Berkshelf][]: `bundle install`
@@ -18,11 +14,15 @@ The `simple_launch` recipe creates user and group *ipynb*, creates a spot to sto
 
     vagrant up
 
-Once finished, the IPython notebook should be reach-able from your host (through port forwarding) on 127.0.0.1:8888.
+Once finished, the IPython notebook can be accessed from your host machine (through port forwarding) on 127.0.0.1:8888.
 
 # Attributes
 
 # Recipes
+
+The `default` recipe simply installs (using system packages) IPython Notebook, numpy, Pandas, matplotlib, and all the dependencies for these.
+
+The `simple_launch` recipe creates user and group *ipynb*, creates a spot to store notebooks, and sets up ipython notebook as a service using supervisord.
 
 # Contributing
 
