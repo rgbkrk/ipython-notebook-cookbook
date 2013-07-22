@@ -17,10 +17,6 @@ Vagrant.configure("2") do |config|
     config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-11.2.0.box"
   end
 
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  config.vm.box_url = "https://dl.dropbox.com/u/31081437/Berkshelf-CentOS-6.3-x86_64-minimal.box"
-
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
   # any other machines on the same network, but cannot be accessed (through this
@@ -86,6 +82,8 @@ Vagrant.configure("2") do |config|
     }
 
     chef.run_list = [
+        "recipe[apt]",
+        "recipe[yum]",
         "recipe[ipynb-cookbook::default]"
     ]
   end

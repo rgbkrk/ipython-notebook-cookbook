@@ -1,4 +1,9 @@
+#!/usr/bin/env ruby
+
 site :opscode
 
-metadata
 cookbook 'python', '~> 1.3.4'
+cookbook 'apt'
+cookbook 'yum'
+
+metadata
