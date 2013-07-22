@@ -1,4 +1,8 @@
-# ipynb-cookbook cookbook
+# ipynb-cookbook
+
+IPython notebook cookbook for deployment using Chef+Berkshelf.
+
+Make it easy, make it awesome.
 
 # Requirements
 
@@ -10,4 +14,4 @@
 
 # Author
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: Kyle Kelley rgbkrk@gmail.com
