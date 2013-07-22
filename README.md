@@ -1,8 +1,6 @@
 # ipynb-cookbook
 
-IPython notebook cookbook for deployment.
-
-Sets up an IPython Notebook server.
+Sets up an IPython Notebook server using Chef.
 
 The default recipe simply installs (using system packages) IPython Notebook, numpy, Pandas, matplotlib, and all the dependencies for these.
 
