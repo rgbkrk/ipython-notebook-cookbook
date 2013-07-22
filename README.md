@@ -1,4 +1,13 @@
-ipynb-cookbook
-==============
+# ipynb-cookbook cookbook
 
-IPython Notebook Cookbook for Deployment Awesomeness
+# Requirements
+
+# Usage
+
+# Attributes
+
+# Recipes
+
+# Author
+
+Author:: YOUR_NAME (<YOUR_EMAIL>)
