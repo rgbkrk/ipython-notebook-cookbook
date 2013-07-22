@@ -1,6 +1,6 @@
 # ipynb-cookbook
 
-IPython notebook cookbook for deployment using Chef+Berkshelf.
+IPython notebook cookbook for deployment.
 
 Make it easy, make it awesome.
 
@@ -12,9 +12,23 @@ Make it easy, make it awesome.
 
 # Usage
 
+## Bootstrap VirtualBox
+
+    vagrant up
+
+Once finished, the IPython notebook should be reach-able from your host (through port forwarding) on 127.0.0.1:8888.
+
 # Attributes
 
 # Recipes
+
+# Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b feature1`)
+3. Commit your changes (`git commit -am 'Added new provider to ...'`)
+4. Push to the branch (`git push origin feature1`)
+5. Create a new Pull Request
 
 # Author
 
