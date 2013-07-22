@@ -2,24 +2,24 @@
 
 include_recipe "supervisor"
 
-group 'ipynb' do
-     group_name 'ipynb'
+group node[:ipynb][:group] do
+     group_name node[:ipynb][:group]
      action :create
 end
 
 # For now we'll make the user ipynb until we make it configurable
-user 'ipynb' do
+user node[:ipynb][:user] do
   comment 'User for ipython notebook'
-  gid 'ipynb'
-  home '/home/ipynb'
+  gid node[:ipynb][:group]
+  home node[:ipynb][:home_dir]
   shell '/bin/bash'
   supports :manage_home => true
   action :create
 end
 
-directory '/home/ipynb/notebooks/' do
-   owner 'ipynb'
-   group 'ipynb'
+directory node[:ipynb][:notebook_dir] do
+   owner node[:ipynb][:user]
+   group node[:ipynb][:group]
    mode '0775'
    action :create
 end
@@ -28,9 +28,9 @@ supervisor_service "ipynb" do
    action :enable
    autostart true
    autorestart true
-   user "ipynb"
-   command "ipython notebook --port=8888 --ip=*"
+   user node[:ipynb][:user]
+   command "ipython notebook --port=#{node[:ipynb][:port]} --ip=*"
    stopsignal "QUIT"
-   directory "/home/ipynb/notebooks"
+   directory node[:ipynb][:notebook_dir]
 end
 
