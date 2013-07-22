@@ -2,7 +2,11 @@
 
 IPython notebook cookbook for deployment.
 
-Make it easy, make it awesome.
+Sets up an IPython Notebook server.
+
+The default recipe simply installs (using system packages) IPython Notebook, numpy, Pandas, matplotlib, and all the dependencies for these.
+
+The `simple_launch` recipe creates user and group *ipynb*, creates a spot to store notebooks, and sets up ipython notebook as a service using supervisord.
 
 # Requirements
 
