@@ -6,6 +6,10 @@ Make it easy, make it awesome.
 
 # Requirements
 
+ * [Berkshelf][]: `bundle install`
+  * [Vagrant][] 1.1.0 and greater
+   * Berkshelf plugin for Vagrant: `vagrant plugin install vagrant-berkshelf`
+
 # Usage
 
 # Attributes
