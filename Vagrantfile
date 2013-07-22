@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
   # via the IP. Host-only networks can talk to the host machine as well as
   # any other machines on the same network, but cannot be accessed (through this
   # network interface) by any external networks.
-  config.vm.network :private_network, ip: "33.33.33.10"
+  # config.vm.network :private_network, ip: "33.33.33.10"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -32,6 +32,7 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
+  config.vm.network :forwarded_port, guest: 8888, host: 8888
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -84,7 +85,8 @@ Vagrant.configure("2") do |config|
     chef.run_list = [
         "recipe[apt]",
         "recipe[yum]",
-        "recipe[ipynb-cookbook::default]"
+        "recipe[ipynb-cookbook::default]",
+        "recipe[ipynb-cookbook::simple_launch]"
     ]
   end
 end

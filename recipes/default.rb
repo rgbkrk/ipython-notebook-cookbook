@@ -11,11 +11,11 @@ include_recipe "python"
 
 # python_pip "numpy"
 
-%w{ipython ipython-notebook ipython-doc python-pandas ipython-qtconsole python-matplotlib python-numpy apache2 httpd libjs-jquery-ui-docs python-egenix-mxdatetime mysql-server-5.1 mysql-server python-mysqldb-dbg libcurl4-gnutls-dev python-pycurl-dbg mysql-client postgresql-client}.each do |pkg|
+%w{ipython ipython-notebook ipython-doc python-pandas ipython-qtconsole
+   python-matplotlib python-numpy libjs-jquery-ui-docs python-egenix-mxdatetime
+   libcurl4-gnutls-dev python-pycurl-dbg}.each do |pkg|
    package pkg do
       action :upgrade
    end
 end
-
-
 
