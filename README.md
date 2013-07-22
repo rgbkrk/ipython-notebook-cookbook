@@ -18,6 +18,14 @@ Once finished, the IPython notebook can be accessed from your host machine (thro
 
 # Attributes
 
+```ruby
+default[:ipynb][:user] = "ipynb"
+default[:ipynb][:group] = "ipynb"
+default[:ipynb][:home_dir] = "/home/ipynb/"
+default[:ipynb][:notebook_dir] = File.join(default[:ipynb][:home_dir], "notebooks")
+default[:ipynb][:port] = 8888
+```
+
 # Recipes
 
 The `default` recipe simply installs (using system packages) IPython Notebook, numpy, Pandas, matplotlib, and all the dependencies for these.
