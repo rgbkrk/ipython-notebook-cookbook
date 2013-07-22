@@ -7,8 +7,8 @@ Make it easy, make it awesome.
 # Requirements
 
  * [Berkshelf][]: `bundle install`
-  * [Vagrant][] 1.1.0 and greater
-   * Berkshelf plugin for Vagrant: `vagrant plugin install vagrant-berkshelf`
+ * [Vagrant][] 1.1.0 and greater
+ * Berkshelf plugin for Vagrant: `vagrant plugin install vagrant-berkshelf`
 
 # Usage
 
@@ -19,3 +19,7 @@ Make it easy, make it awesome.
 # Author
 
 Author:: Kyle Kelley rgbkrk@gmail.com
+
+[Vagrant]:http://vagrantup.com/
+[Berkshelf]:http://berkshelf.com/
+[Bundler]:http://gembundler.com/
