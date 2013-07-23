@@ -1,4 +1,4 @@
-# Creates a simple setup of an IPython notebook server, creating a dummy user, a place to store IPython notebooks,
+# Creates a simple setup of an IPython notebook server, creating a dummy user, a place to store IPython notebooks, and sets up IPython notebook as a service
 
 include_recipe "supervisor"
 
@@ -29,7 +29,7 @@ supervisor_service "ipynb" do
    autostart true
    autorestart true
    user node[:ipynb][:user]
-   command "ipython notebook --port=#{node[:ipynb][:port]} --ip=*"
+   command "ipython notebook --pylab inline --port=#{node[:ipynb][:port]} --ip=*"
    stopsignal "QUIT"
    directory node[:ipynb][:notebook_dir]
 end
