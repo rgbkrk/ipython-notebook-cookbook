@@ -1,6 +1,6 @@
 # Creates a simple setup of an IPython notebook server, creating a dummy user, a place to store IPython notebooks, and sets up IPython notebook as a service
 
-node[:supervisor][:version] = "3.0b2"
+node.default[:supervisor][:version] = "3.0b2"
 
 include_recipe "supervisor"
 
