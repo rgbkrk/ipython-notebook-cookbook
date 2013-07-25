@@ -46,7 +46,6 @@ node[:ipynb][:scientific_stack].each do |pkg|
    end
 end
 
-
 # Time for IPython notebook goodness
 node[:ipynb][:ipython_packages].each do |pkg|
    python_pip pkg do
