@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :IPyBox
 
   config.vm.provider "virtualbox" do |ipybox|
-     ipybox.name = "ipybox"
+     ipybox.name = "IPyBox"
   end
 
   config.vm.hostname = "ipynb-cookbook-berkshelf"
@@ -24,8 +24,10 @@ Vagrant.configure("2") do |config|
     config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-11.2.0.box"
   end
 
-  # Forward the default 8888 port for the IPython notebook
-  config.vm.network :forwarded_port, guest: 8888, host: 8888
+  # Forward the default 8888 port for the IPython notebook,
+  # keeping the port different on the host box in case the user
+  # is running the IPython notebook locally
+  config.vm.network :forwarded_port, guest: 8888, host: 9999
 
   config.ssh.max_tries = 40
   config.ssh.timeout   = 120

@@ -36,32 +36,26 @@ python_virtualenv node[:ipynb][:virtenv] do
    action :create
 end
 
-# Numpy must be first, due to the way it builds
-python_pip "numpy" do
-   virtualenv node[:ipynb][:virtenv]
-   action :upgrade
-end
-
-# Dependencies for matplotlib + others
-# Version for pytz is being fixed to account for the awkward issue with
-# setuptools right now
-["freetype-py", "PIL", "python-dateutil", "pytz==2013b", "six"].each do |pkg|
+# Install the entire scientific computing stack, including numpy, scipy,
+# matplotlib, and pandas
+node[:ipynb][:scientific_stack].each do |pkg|
    python_pip pkg do
       virtualenv node[:ipynb][:virtenv]
       action :upgrade
    end
 end
 
-# More essential packages
-["scipy", "pandas", "matplotlib"].each do |pkg|
-   python_pip pkg do
-      virtualenv node[:ipynb][:virtenv]
-      action :upgrade
-   end
-end
 
 # Time for IPython notebook goodness
-["tornado", "pyzmq", "statsmodels", "ipython"].each do |pkg|
+node[:ipynb][:ipython_packages].each do |pkg|
+   python_pip pkg do
+      virtualenv node[:ipynb][:virtenv]
+      action :upgrade
+   end
+end
+
+# Any additional packages to build into the same virtual environment
+node[:ipynb][:extra_packages].each do |pkg|
    python_pip pkg do
       virtualenv node[:ipynb][:virtenv]
       action :upgrade
