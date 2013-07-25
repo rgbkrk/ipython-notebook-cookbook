@@ -6,6 +6,7 @@ Sets up an IPython Notebook server using Chef.
  * [Berkshelf][]: `gem install berks`
  * [Vagrant][] 1.1.0 and greater
  * Berkshelf plugin for Vagrant: `vagrant plugin install vagrant-berkshelf`
+ * Omnibus plugin for Vagrant: `vagrant plugin install vagrant-omnibus`
 
 # Usage
 
