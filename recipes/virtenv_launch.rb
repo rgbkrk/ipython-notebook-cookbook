@@ -5,13 +5,13 @@ node.default[:supervisor][:version] = "3.0b2"
 
 include_recipe "supervisor"
 
-# Create a group for the IPython notebook
+# Group using the notebook files (*nix permissions)
 group node[:ipynb][:group] do
      group_name node[:ipynb][:group]
      action :create
 end
 
-# For now we'll make the user ipynb until we make it configurable
+# User (also runs the IPython notebook)
 user node[:ipynb][:user] do
   comment 'User for ipython notebook'
   gid node[:ipynb][:group]
@@ -21,6 +21,7 @@ user node[:ipynb][:user] do
   action :create
 end
 
+# Decide where to store notebooks
 directory node[:ipynb][:notebook_dir] do
    owner node[:ipynb][:user]
    group node[:ipynb][:group]
