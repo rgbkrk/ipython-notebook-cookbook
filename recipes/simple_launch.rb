@@ -1,4 +1,15 @@
-# Creates a simple setup of an IPython notebook server, creating a dummy user, a place to store IPython notebooks, and sets up IPython notebook as a service
+#
+# Cookbook Name:: ipynb-cookbook
+# Recipe:: simple_launch
+#
+# Creates a simple setup of an IPython notebook server, creating a dummy user, a
+# place to store IPython notebooks, and sets up IPython notebook as a service
+#
+# Copyright (C) 2013 Rackspace
+#
+# Licensed under the Apache 2.0 License.
+#
+
 
 node.default[:supervisor][:version] = "3.0b2"
 
