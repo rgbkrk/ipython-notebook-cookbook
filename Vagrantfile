@@ -2,15 +2,17 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
+
+  # Name the box for Vagrant
+  config.vm.define :IPyBox
 
   config.vm.provider "virtualbox" do |ipybox|
-     ipybox.name = "ipybox"
+     ipybox.name = "IPyBox"
   end
 
   config.vm.hostname = "ipynb-cookbook-berkshelf"
+
+  config.omnibus.chef_version = "11.4.0"
 
   # Default to using Ubuntu, unless specified otherwise
   case ENV['VMBOX']
@@ -22,8 +24,10 @@ Vagrant.configure("2") do |config|
     config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-11.2.0.box"
   end
 
-  # Forward the default 8888 port for the IPython notebook
-  config.vm.network :forwarded_port, guest: 8888, host: 8888
+  # Forward the default 8888 port for the IPython notebook,
+  # keeping the port different on the host box in case the user
+  # is running the IPython notebook locally
+  config.vm.network :forwarded_port, guest: 8888, host: 9999
 
   config.ssh.max_tries = 40
   config.ssh.timeout   = 120
@@ -45,7 +49,7 @@ Vagrant.configure("2") do |config|
         "recipe[apt]",
         "recipe[yum]",
         "recipe[ipynb-cookbook::default]",
-        "recipe[ipynb-cookbook::simple_launch]"
+        "recipe[ipynb-cookbook::virtenv_launch]"
     ]
   end
 end
