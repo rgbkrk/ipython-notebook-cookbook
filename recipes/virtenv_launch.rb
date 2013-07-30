@@ -46,12 +46,18 @@ node[:ipynb][:scientific_stack].each do |pkg|
    end
 end
 
-# Time for IPython notebook goodness
-node[:ipynb][:ipython_packages].each do |pkg|
+# IPython notebook dependencies
+node[:ipynb][:ipython_deps].each do |pkg|
    python_pip pkg do
       virtualenv node[:ipynb][:virtenv]
       action :upgrade
    end
+end
+
+# IPython proper
+python_pip node[:ipynb][:ipython_package] do
+   virtualenv node[:ipynb][:virtenv]
+   action :upgrade
 end
 
 # Any additional packages to build into the same virtual environment
@@ -62,13 +68,18 @@ node[:ipynb][:extra_packages].each do |pkg|
    end
 end
 
-supervisor_service "ipynb" do
+# Setup an IPython notebook service
+supervisor_service node[:ipynb][:service_name] do
    user node[:ipynb][:user]
    directory node[:ipynb][:home_dir]
+
+   # Make the path for the service be the virtualenvironment
    environment "PATH" => (File.join(node[:ipynb][:virtenv], "bin"))
    action :enable
    autostart true
    autorestart true
+
+   # Start up the IPython notebook as a service
    command "#{node[:ipynb][:virtenv]}/bin/ipython notebook --pylab inline --port=#{node[:ipynb][:port]} --ip=*"
    stopsignal "QUIT"
 end
