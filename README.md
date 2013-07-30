@@ -2,6 +2,8 @@
 
 Sets up an IPython Notebook server using Chef.
 
+Configuration/templating features will be coded towards IPython 1.0.0, which has not been released yet.
+
 # Requirements
  * [Berkshelf][]: `gem install berks`
  * [Vagrant][] 1.2.4 or higher
