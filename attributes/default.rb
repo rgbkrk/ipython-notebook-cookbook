@@ -16,19 +16,28 @@ default[:ipynb][:port] = 8888
 # The scientific computing stack, installed in order
 # Note that numpy must be first and the dependencies for matplotlib also have
 # to start first due to the way numpy+matplotlib are packaged
-default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "PIL",
+default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
                                       "python-dateutil", "pytz==2013b", "six",
                                       "scipy", "pandas", "matplotlib"]
 
+default[:ipynb][:ipython_git_repo] = 'git@github.com:ipython/ipython.git@732be29ef9a7d5c7bbd9d0c338f40db5fd330496'
+
+
 # All the dependencies for IPython + IPython notebook
-default[:ipynb][:ipython_packages] = ["tornado", "pyzmq", "statsmodels", "ipython" ]
+default[:ipynb][:ipython_packages] = ["tornado",
+                                      "pyzmq",
+                                      "statsmodels",
+                                      "-e git+#{node[:ipynb][:ipython_git_repo]}#egg=ipython"
+]
 
 # Additional packages to install into the same virtualenv as the IPython notebook
 default[:ipynb][:extra_packages] = []
 
 # System packages, at least for Ubuntu (naming may change)
-default[:ipynb][:system_packages] = %w{ipython ipython-notebook ipython-doc python-pandas ipython-qtconsole
+default[:ipynb][:system_packages] = %w{
+   ipython ipython-notebook python-pandas
    libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
    python-matplotlib python-numpy libjs-jquery-ui-docs python-egenix-mxdatetime
-   libcurl4-gnutls-dev python-pycurl-dbg}
+   libcurl4-gnutls-dev python-pycurl-dbg git-core
+}
 
