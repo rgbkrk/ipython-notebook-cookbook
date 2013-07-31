@@ -16,15 +16,15 @@ node.default[:supervisor][:version] = "3.0b2"
 include_recipe "supervisor"
 
 # Create a group for the IPython notebook
-group node[:ipynb][:group] do
-     group_name node[:ipynb][:group]
+group node[:ipynb][:linux_group] do
+     group_name node[:ipynb][:linux_group]
      action :create
 end
 
 # Set up a user for IPython notebook, complete with a home directory
-user node[:ipynb][:user] do
+user node[:ipynb][:linux_user] do
   comment 'User for ipython notebook'
-  gid node[:ipynb][:group]
+  gid node[:ipynb][:linux_group]
   home node[:ipynb][:home_dir]
   shell '/bin/bash'
   supports :manage_home => true
@@ -33,21 +33,22 @@ end
 
 # Set up a simple place to store notebooks
 directory node[:ipynb][:notebook_dir] do
-   owner node[:ipynb][:user]
-   group node[:ipynb][:group]
+   owner node[:ipynb][:linux_user]
+   group node[:ipynb][:linux_group]
    mode '0775'
    action :create
 end
 
-# Launch IPython notebook as a service
-supervisor_service "ipynb" do
+# Setup an IPython notebook service
+supervisor_service node[:ipynb][:service_name] do
+   user node[:ipynb][:linux_user]
+   directory node[:ipynb][:home_dir]
+
    action :enable
    autostart true
    autorestart true
-   user node[:ipynb][:user]
-   # For now simply support pylab inline, pick the port and assume broadcasting on all IPs
-   command "ipython notebook --pylab inline --port=#{node[:ipynb][:port]} --ip=*"
-   stopsignal "QUIT"
-   directory node[:ipynb][:notebook_dir]
-end
 
+   # Start up the IPython notebook as a service
+   command "#{node[:ipynb][:virtenv]}/bin/ipython notebook --pylab #{node[:ipynb][:NotebookApp][:pylab]} --port=#{node[:ipynb][:NotebookApp][:port]} --ip=#{node[:ipynb][:NotebookApp][:ip]}"
+   stopsignal "QUIT"
+end
