@@ -68,6 +68,7 @@ default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
 
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)
 # Default is a commit hash from the evening of July 30, 2013, eagerly waiting the release of IPython 1.0
+# Most of the attributes, configuration, etc. rely on IPython 1.0 so be wary if for some reason you want to use 0.x releases.
 default[:ipynb][:ipython_package] = '-e git+https://github.com/ipython/ipython.git@55dfcbc98cd2f1e2bfc6c9f127c97a746f79c459#egg=ipython'
 
 # All the dependencies for IPython + IPython notebook

@@ -1,7 +1,7 @@
 # Create a full IPython installation along with standard scientific computing tools
 
 # Workaround due to the way pip was being installed.
-node.default[:supervisor][:version] = "3.0b2"
+node.default[:supervisor][:version] = "3.0"
 
 include_recipe "supervisor"
 
