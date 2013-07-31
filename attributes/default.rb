@@ -1,15 +1,15 @@
-# Attributes for the IPython cookbook
+# Default attributes for the IPython cookbook
 
 ########################################
 # Server side configuration
 ########################################
 
-# User and group for IPython
-default[:ipynb][:user] = "ipynb"
-default[:ipynb][:group] = "ipynb"
+# linux user and group for the system IPython is being deployed to
+default[:ipynb][:linux_user] = "ipynb"
+default[:ipynb][:linux_group] = "ipynb"
 
-# Home directory for the user
-default[:ipynb][:home_dir] = "/home/ipynb/"
+# Home directory for the system user
+default[:ipynb][:home_dir] = File.join("/home/", default[:ipynb][:linux_user])
 
 # Spot to store the notebook files
 default[:ipynb][:notebook_dir] = File.join(default[:ipynb][:home_dir], "notebooks")
@@ -56,7 +56,19 @@ default[:ipynb][:NotebookApp][:webapp_settings][:static_url_prefix] = nil
 
 
 ########################################
-# Software stack
+# Software Stack (system packages)
+########################################
+
+# System packages, at least for Ubuntu (naming may change)
+default[:ipynb][:system_packages] = %w{
+   libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
+   libcurl4-gnutls-dev python-pycurl-dbg git-core
+   python-egenix-mxdatetime python-numpy python-matplotlib
+   ipython ipython-notebook python-pandas
+}
+
+########################################
+# Software Stack (pip installs)
 ########################################
 
 # The scientific computing stack, installed in order
@@ -79,12 +91,4 @@ default[:ipynb][:ipython_deps] = ["tornado",
 
 # Additional packages to install into the same virtualenv as the IPython notebook
 default[:ipynb][:extra_packages] = []
-
-# System packages, at least for Ubuntu (naming may change)
-default[:ipynb][:system_packages] = %w{
-   ipython ipython-notebook python-pandas
-   libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
-   python-matplotlib python-numpy libjs-jquery-ui-docs python-egenix-mxdatetime
-   libcurl4-gnutls-dev python-pycurl-dbg git-core
-}
 

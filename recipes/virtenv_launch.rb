@@ -1,20 +1,20 @@
 # Create a full IPython installation along with standard scientific computing tools
 
-# Workaround due to the way pip was being installed.
+# Workaround due to the pip, setuptools, supervisor craziness these past few weeks.
 node.default[:supervisor][:version] = "3.0"
 
 include_recipe "supervisor"
 
 # Group using the notebook files (*nix permissions)
-group node[:ipynb][:group] do
-     group_name node[:ipynb][:group]
+group node[:ipynb][:linux_group] do
+     group_name node[:ipynb][:linux_group]
      action :create
 end
 
 # User (also runs the IPython notebook)
-user node[:ipynb][:user] do
+user node[:ipynb][:linux_user] do
   comment 'User for ipython notebook'
-  gid node[:ipynb][:group]
+  gid node[:ipynb][:linux_group]
   home node[:ipynb][:home_dir]
   shell '/bin/bash'
   supports :manage_home => true
@@ -23,8 +23,8 @@ end
 
 # Decide where to store notebooks
 directory node[:ipynb][:notebook_dir] do
-   owner node[:ipynb][:user]
-   group node[:ipynb][:group]
+   owner node[:ipynb][:linux_user]
+   group node[:ipynb][:linux_group]
    mode '0775'
    action :create
 end
@@ -32,8 +32,8 @@ end
 # Create a virtual environment
 python_virtualenv node[:ipynb][:virtenv] do
    interpreter node[:ipynb][:py_version]
-   owner node[:ipynb][:user]
-   group node[:ipynb][:group]
+   owner node[:ipynb][:linux_user]
+   group node[:ipynb][:linux_group]
    action :create
 end
 
@@ -70,7 +70,7 @@ end
 
 # Setup an IPython notebook service
 supervisor_service node[:ipynb][:service_name] do
-   user node[:ipynb][:user]
+   user node[:ipynb][:linux_user]
    directory node[:ipynb][:home_dir]
 
    # Make the path for the service be the virtualenvironment
