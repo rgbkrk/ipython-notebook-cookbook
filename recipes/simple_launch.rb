@@ -39,15 +39,16 @@ directory node[:ipynb][:notebook_dir] do
    action :create
 end
 
-# Launch IPython notebook as a service
-supervisor_service "ipynb" do
+# Setup an IPython notebook service
+supervisor_service node[:ipynb][:service_name] do
+   user node[:ipynb][:linux_user]
+   directory node[:ipynb][:home_dir]
+
    action :enable
    autostart true
    autorestart true
-   user node[:ipynb][:linux_user]
-   # For now simply support pylab inline, pick the port and assume broadcasting on all IPs
-   command "ipython notebook --pylab inline --port=#{node[:ipynb][:NotebookApp][:port]} --ip=*"
-   stopsignal "QUIT"
-   directory node[:ipynb][:notebook_dir]
-end
 
+   # Start up the IPython notebook as a service
+   command "#{node[:ipynb][:virtenv]}/bin/ipython notebook --pylab #{node[:ipynb][:NotebookApp][:pylab]} --port=#{node[:ipynb][:NotebookApp][:port]} --ip=#{node[:ipynb][:NotebookApp][:ip]}"
+   stopsignal "QUIT"
+end
