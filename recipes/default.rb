@@ -9,8 +9,6 @@
 
 include_recipe "python"
 
-# python_pip "numpy"
-
 # Make the package manager handle an initial install so that we
 # have system dependencies, whether we run IPython from site-packages or a
 # virtualenv.
