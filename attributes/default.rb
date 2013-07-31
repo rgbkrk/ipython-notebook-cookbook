@@ -47,7 +47,7 @@ default[:ipynb][:NotebookApp][:certfile] = nil
 
 # NotebookApp.password
 # Default here is IPassword
-default[:ipynb][:NotebookApp][:nb_password_hash] = 'sha1:f918d238efbd:4a250470288eb6a41f5df648a39f82606cbd33dd'
+default[:ipynb][:NotebookApp][:password_hash] = 'sha1:f918d238efbd:4a250470288eb6a41f5df648a39f82606cbd33dd'
 
 # Landing page settings
 default[:ipynb][:NotebookApp][:base_project_url] = nil
@@ -67,12 +67,12 @@ default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
                                       "scipy", "pandas", "matplotlib"]
 
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)
-default[:ipynb][:ipython_package] = '-e git+https://github.com/ipython/ipython.git#egg=ipython'
+# Default is a commit hash from the evening of July 30, 2013, eagerly waiting the release of IPython 1.0
+default[:ipynb][:ipython_package] = '-e git+https://github.com/ipython/ipython.git@55dfcbc98cd2f1e2bfc6c9f127c97a746f79c459#egg=ipython'
 
 # All the dependencies for IPython + IPython notebook
 default[:ipynb][:ipython_deps] = ["tornado",
                                   "pyzmq",
-                                  "statsmodels",
                                   "jinja2"
 ]
 
@@ -86,6 +86,4 @@ default[:ipynb][:system_packages] = %w{
    python-matplotlib python-numpy libjs-jquery-ui-docs python-egenix-mxdatetime
    libcurl4-gnutls-dev python-pycurl-dbg git-core
 }
-
-
 

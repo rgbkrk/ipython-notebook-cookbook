@@ -80,7 +80,7 @@ supervisor_service node[:ipynb][:service_name] do
    autorestart true
 
    # Start up the IPython notebook as a service
-   command "#{node[:ipynb][:virtenv]}/bin/ipython notebook --pylab inline --port=#{node[:ipynb][:port]} --ip=*"
+   command "#{node[:ipynb][:virtenv]}/bin/ipython notebook --pylab inline --port=#{node[:ipynb][:NotebookApp][:port]} --ip=*"
    stopsignal "QUIT"
 end
 
