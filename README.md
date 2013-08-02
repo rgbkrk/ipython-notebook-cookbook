@@ -24,9 +24,7 @@ See `attributes/default.rb` for default values. Most values including `:linux_us
 
 Particularly important parameters for configuration of the notebook are located in `node[:ipynb][:NotebookApp]`.
 
-If you're using the virtualenv recipe, you can either install more to the same virtualenv (`node[:ipynb][:virtenv]`) oradd additional packages to `node[:ipynb][:extra_packages]`.
-
-```
+If you're using the virtualenv recipe, you can either install more to the same virtualenv (`node[:ipynb][:virtenv]`) or add additional packages to `node[:ipynb][:extra_packages]`.
 
 # Recipes
 
