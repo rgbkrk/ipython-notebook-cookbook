@@ -1,4 +1,6 @@
-# Default attributes for the IPython cookbook
+##############################################
+# IPython Notebook Cookbook Default Attributes
+##############################################
 
 ########################################
 # Server side configuration
@@ -54,6 +56,15 @@ default[:ipynb][:NotebookApp][:base_project_url] = nil
 default[:ipynb][:NotebookApp][:base_kernel_url] = nil
 default[:ipynb][:NotebookApp][:webapp_settings][:static_url_prefix] = nil
 
+########################################
+# Virtualenv
+########################################
+
+# Where to store the virtual environment IPython runs in
+default[:ipynb][:virtenv] = File.join(default[:ipynb][:home_dir], "ipyvirt")
+
+# Version of Python to use
+default[:ipynb][:py_version] = "python2.7"
 
 ########################################
 # Software Stack (system packages)
@@ -91,4 +102,6 @@ default[:ipynb][:ipython_deps] = ["tornado",
 
 # Additional packages to install into the same virtualenv as the IPython notebook
 default[:ipynb][:extra_packages] = ["bookstore==0.0.3a"]
+
+
 
