@@ -81,7 +81,7 @@ default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)
 # Default is a commit hash from the evening of July 30, 2013, eagerly waiting the release of IPython 1.0
 # Most of the attributes, configuration, etc. rely on IPython 1.0 so be wary if for some reason you want to use 0.x releases.
-default[:ipynb][:ipython_package] = 'https://1f2133dc3aab4203faba-815b705eb00655bf9ca363d7dfb3b606.ssl.cf2.rackcdn.com/ipython-1.0.0a1.zip'
+default[:ipynb][:ipython_package] = 'https://1f2133dc3aab4203faba-815b705eb00655bf9ca363d7dfb3b606.ssl.cf2.rackcdn.com/ipython-1.0.0a1.zip#egg=ipython-1.0.0a1'
 
 # All the dependencies for IPython + IPython notebook
 default[:ipynb][:ipython_deps] = ["tornado",
@@ -90,5 +90,5 @@ default[:ipynb][:ipython_deps] = ["tornado",
 ]
 
 # Additional packages to install into the same virtualenv as the IPython notebook
-default[:ipynb][:extra_packages] = []
+default[:ipynb][:extra_packages] = ["bookstore==0.0.3a"]
 
