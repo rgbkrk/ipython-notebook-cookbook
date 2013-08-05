@@ -47,8 +47,35 @@ default[:ipynb][:NotebookApp][:open_browser] = 'False'
 #
 default[:ipynb][:NotebookApp][:certfile] = nil
 
-# NotebookApp.password
-# Default here is IPassword
+# Hashed Password with Salt, Algorithm for accessing the IPython Notebook
+#
+# You can generate one using IPython.lib.passwd
+#
+#     In [1]: from IPython.lib import passwd
+#
+#     In [2]: passwd()
+#     Enter password:
+#     Verify password:
+#     Out[2]: 'sha1:47850f246447:2886935dc08e949f84aeaa41c0030d95253b61b3'
+#
+# The structure of the result is ALGORITHM:SALT:HASH.
+#
+# Roughly speaking the password is converted to UTF-8 (when in Python 2.7) using string.encode
+#
+# >>> user_password = "IPassword"
+# >>> normalized_password = user_password.encode("utf-8", "replace")
+# >>> # Python 3 encodes the salt to ascii (it remains the same for Python 2.7)
+# >>> normalized_salt = salt.encode("ascii")
+# >>> h = hashlib.new(algorithm) # e.g. sha1
+# >>> h.update(normalized_password + normalized_salt)
+#
+# In [10]: passwd("IPassword")
+# Out[10]: 'sha1:7f4bcfc8850f:eb4a986083f011b8f7a2604265a7282b74964dc2'
+#
+# In [11]: h = hashlib.new("sha1"); h.update("IPassword".encode("utf-8","replace")+"7f4bcfc8850f"); h.hexdigest()
+# Out[11]: 'eb4a986083f011b8f7a2604265a7282b74964dc2'
+#
+# Default shown here is "IPassword" (without the quotes)
 default[:ipynb][:NotebookApp][:password_hash] = 'sha1:f918d238efbd:4a250470288eb6a41f5df648a39f82606cbd33dd'
 
 # Landing page settings
@@ -87,7 +114,7 @@ default[:ipynb][:system_packages] = %w{
 # to start first due to the way numpy+matplotlib are packaged
 default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
                                       "python-dateutil", "pytz==2013b", "six",
-                                      "scipy", "pandas", "matplotlib"]
+                                      "scipy", "pandas", "matplotlib", "scikit-learn"]
 
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)
 # Default is a commit hash from the evening of July 30, 2013, eagerly waiting the release of IPython 1.0

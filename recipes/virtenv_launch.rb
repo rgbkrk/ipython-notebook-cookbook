@@ -5,21 +5,6 @@ node.default[:supervisor][:version] = "3.0"
 
 include_recipe "supervisor"
 
-# Group using the notebook files (*nix permissions)
-group node[:ipynb][:linux_group] do
-     group_name node[:ipynb][:linux_group]
-     action :create
-end
-
-# User (also runs the IPython notebook)
-user node[:ipynb][:linux_user] do
-  comment 'User for ipython notebook'
-  gid node[:ipynb][:linux_group]
-  home node[:ipynb][:home_dir]
-  shell '/bin/bash'
-  supports :manage_home => true
-  action :create
-end
 
 # Create the directory for storing notebooks
 directory node[:ipynb][:notebook_dir] do

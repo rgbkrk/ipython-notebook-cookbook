@@ -18,6 +18,22 @@ node[:ipynb][:system_packages].each do |pkg|
    end
 end
 
+# Group running the IPython notebook (*nix permissions)
+group node[:ipynb][:linux_group] do
+     group_name node[:ipynb][:linux_group]
+     action :create
+end
+
+# User (also runs the IPython notebook)
+user node[:ipynb][:linux_user] do
+  comment 'User for ipython notebook'
+  gid node[:ipynb][:linux_group]
+  home node[:ipynb][:home_dir]
+  shell '/bin/bash'
+  supports :manage_home => true
+  action :create
+end
+
 # Create a virtual environment
 python_virtualenv node[:ipynb][:virtenv] do
    interpreter node[:ipynb][:py_version]
@@ -56,4 +72,17 @@ node[:ipynb][:extra_packages].each do |pkg|
       action :upgrade
    end
 end
+
+
+# Build up a profile
+template "/tmp/profile.py" do
+   owner node[:ipynb][:linux_user]
+   group node[:ipynb][:linux_group]
+   mode 00644
+   source "ipython_notebook_config.py.erb"
+end
+
+
+
+
 
