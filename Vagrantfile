@@ -40,15 +40,15 @@ Vagrant.configure("2") do |config|
     chef.json = {
       :ipynb => {
          # Make boot up quicker when simply testing the notebook
-         :scientific_stack = []
+         :scientific_stack => [],
       }
     }
 
     chef.run_list = [
         "recipe[apt]",
         "recipe[yum]",
-        "recipe[ipynb-cookbook::default]",
-        "recipe[ipynb-cookbook::virtenv_launch]"
+        "recipe[ipynb::default]",
+        "recipe[ipynb::virtenv_launch]"
     ]
   end
 end

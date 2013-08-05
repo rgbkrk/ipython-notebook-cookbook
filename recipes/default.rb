@@ -1,5 +1,4 @@
-#
-# Cookbook Name:: ipynb-cookbook
+# Cookbook Name:: ipynb
 # Recipe:: default
 #
 # Copyright (C) 2013 Rackspace
@@ -80,8 +79,4 @@ template "/tmp/profile.py" do
    mode 00644
    source "ipython_notebook_config.py.erb"
 end
-
-
-
-
 
