@@ -73,7 +73,6 @@ node[:ipynb][:extra_packages].each do |pkg|
    end
 end
 
-
 # Build up a profile
 template "/tmp/profile.py" do
    owner node[:ipynb][:linux_user]

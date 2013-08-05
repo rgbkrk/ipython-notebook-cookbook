@@ -101,8 +101,7 @@ default[:ipynb][:py_version] = "python2.7"
 default[:ipynb][:system_packages] = %w{
    libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
    libcurl4-gnutls-dev python-pycurl-dbg git-core
-   python-egenix-mxdatetime python-numpy python-matplotlib
-   ipython ipython-notebook python-pandas
+   python-egenix-mxdatetime
 }
 
 ########################################
