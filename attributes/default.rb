@@ -22,6 +22,9 @@ default[:ipynb][:service_name] = "ipynb"
 # IPython profile
 default[:ipynb][:profile_name] = "cooked"
 
+# IPython directory for settings
+default[:ipynb][:ipython_settings_dir] = File.join(default[:ipynb][:home_dir], ".ipython")
+
 ########################################
 # IPython Notebook runtime configuration
 ########################################
@@ -124,13 +127,14 @@ default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
 default[:ipynb][:ipython_package] = 'https://1f2133dc3aab4203faba-815b705eb00655bf9ca363d7dfb3b606.ssl.cf2.rackcdn.com/ipython-1.0.0-rc1.tar.gz#egg=ipython-1.0.0-rc1'
 
 # All the dependencies for IPython + IPython notebook
-default[:ipynb][:ipython_deps] = ["tornado",
+default[:ipynb][:ipython_deps] = ["tornado==3.1",
                                   "pyzmq",
                                   "jinja2"
 ]
 
 # Additional packages to install into the same virtualenv as the IPython notebook
-default[:ipynb][:extra_packages] = ["bookstore==0.0.4a"]
+default[:ipynb][:extra_packages] = []
+#default[:ipynb][:extra_packages] = ["bookstore==0.0.4a"]
 
 
 

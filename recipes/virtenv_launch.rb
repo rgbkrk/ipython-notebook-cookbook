@@ -20,9 +20,6 @@
 
 # Create a full IPython installation along with standard scientific computing tools
 
-#include_recipe "ipynb::profile"
-include_recipe "ipynb"
-
 # Workaround due to the pip, setuptools, supervisor craziness these past few weeks.
 node.default[:supervisor][:version] = "3.0"
 
@@ -43,10 +40,27 @@ ipynb_profile node[:ipynb][:profile_name] do
    ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
 end
 
+profile_dir = File.join(node[:ipynb][:ipython_settings_dir], "profile_" + node[:ipynb][:profile_name])
+
+nb_config = File.join(profile_dir, "ipython_notebook_config.py")
+
+# Write over the profile with our own built template
+template nb_config do
+   owner node[:ipynb][:linux_user]
+   group node[:ipynb][:linux_group]
+   mode 00644
+   source "ipython_notebook_config.py.erb"
+end
+
 # Setup an IPython notebook service
 supervisor_service node[:ipynb][:service_name] do
    user node[:ipynb][:linux_user]
    directory node[:ipynb][:home_dir]
+
+   # IPython notebook should have access to the shell
+   environment "HOME" => node[:ipynb][:home_dir],
+               "SHELL" => "/bin/bash",
+               "USER" => node[:ipynb][:linux_user]
 
    # Make the path for the service be the virtualenvironment
    #environment "PATH" => (File.join(node[:ipynb][:virtenv], "bin") + ":$PATH")
@@ -55,7 +69,7 @@ supervisor_service node[:ipynb][:service_name] do
    autorestart true
 
    # Start up the IPython notebook as a service
-   command "#{node[:ipynb][:virtenv]}/bin/ipython notebook --pylab #{node[:ipynb][:NotebookApp][:pylab]} --port=#{node[:ipynb][:NotebookApp][:port]} --ip=#{node[:ipynb][:NotebookApp][:ip]}"
+   command "#{node[:ipynb][:virtenv]}/bin/ipython notebook --profile=#{node[:ipynb][:profile_name]}"
    stopsignal "QUIT"
 end
 
