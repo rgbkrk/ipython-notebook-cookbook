@@ -60,7 +60,9 @@ supervisor_service node[:ipynb][:service_name] do
    # IPython notebook should have access to the shell
    environment "HOME" => node[:ipynb][:home_dir],
                "SHELL" => "/bin/bash",
-               "USER" => node[:ipynb][:linux_user]
+               "USER" => node[:ipynb][:linux_user],
+               "PATH" => "#{node[:ipynb][:virtenv]}/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games",
+               "VIRTUAL_ENV" => "#{node[:ipynb][:virtenv]}"
 
    # Make the path for the service be the virtualenvironment
    #environment "PATH" => (File.join(node[:ipynb][:virtenv], "bin") + ":$PATH")
