@@ -105,9 +105,13 @@ default[:ipynb][:py_version] = "python2.7"
 
 # System packages, at least for Ubuntu (naming may change)
 default[:ipynb][:system_packages] = %w{
+   gfortran libblas-dev libblas3gf liblapack3gf liblapack-dev
+   libatlas-dev libatlas-base-dev libscalapack-mpi1 libscalapack-pvm1
+   liblcms-utils python-imaging-doc python-imaging-dbg
+   libamd2.2.0 libjpeg-turbo8 libjpeg8 liblcms1 libumfpack5.4.0 python-imaging
    libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
    libcurl4-gnutls-dev python-pycurl-dbg git-core
-   python-egenix-mxdatetime vim
+   python-egenix-mxdatetime vim python-numpy python-scipy
 }
 
 ########################################
