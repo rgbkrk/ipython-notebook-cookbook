@@ -127,7 +127,9 @@ default[:ipynb][:system_packages] = %w{
 # to start first due to the way numpy+matplotlib are packaged
 default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
                                       "python-dateutil", "pytz==2013b", "six",
-                                      "scipy", "pandas", "matplotlib", "scikit-learn"]
+                                      "scipy", "pandas", "matplotlib", "scikit-learn",
+                                      "pygments"
+                                     ]
 
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)
 # Most of the attributes, configuration, etc. rely on IPython 1.0 so be wary if for some reason you want to use 0.x releases.
