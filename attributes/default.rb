@@ -52,6 +52,7 @@ default[:ipynb][:NotebookApp][:open_browser] = 'False'
 #   http://arstechnica.com/security/news/2009/12/how-to-get-set-with-a-
 #
 default[:ipynb][:NotebookApp][:certfile] = nil
+default[:ipynb][:NotebookApp][:certificate_text] = nil
 
 # Hashed Password with Salt, Algorithm for accessing the IPython Notebook
 #

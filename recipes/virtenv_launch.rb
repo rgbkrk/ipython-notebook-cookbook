@@ -25,13 +25,27 @@ node.default[:supervisor][:version] = "3.0"
 
 include_recipe "supervisor"
 
-
 # Create the directory for storing notebooks
 directory node[:ipynb][:notebook_dir] do
    owner node[:ipynb][:linux_user]
    group node[:ipynb][:linux_group]
    mode '0775'
    action :create
+end
+
+# If certificate file is passed as an attribute
+unless node[:ipynb][:NotebookApp][:certificate_text].nil?
+   # Sets a default spot for the certificate file
+   if node[:ipynb][:NotebookApp][:certfile].nil?
+         node.set[:ipynb][:NotebookApp][:certfile] = File.join(node[:ipynb][:home_dir], "cert.pem")
+   end
+   file node[:ipynb][:NotebookApp][:certfile] do
+      owner node[:ipynb][:linux_user]
+      group node[:ipynb][:linux_group]
+      mode '0600'
+      action :create
+      content node[:ipynb][:NotebookApp][:certificate_text]
+   end
 end
 
 ipynb_profile node[:ipynb][:profile_name] do
