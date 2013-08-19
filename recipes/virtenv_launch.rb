@@ -44,6 +44,13 @@ profile_dir = File.join(node[:ipynb][:ipython_settings_dir], "profile_" + node[:
 
 nb_config = File.join(profile_dir, "ipython_notebook_config.py")
 
+
+# Set the password hash if the password is set
+unless node[:ipynb][:NotebookApp][:password].nil?
+   ipy_hash = IPythonAuth.ipython_hash(node[:ipynb][:NotebookApp][:password])
+   node.set[:ipynb][:NotebookApp][:password_hash] = ipy_hash
+end
+
 # Write over the profile with our own built template
 template nb_config do
    owner node[:ipynb][:linux_user]

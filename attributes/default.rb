@@ -82,7 +82,11 @@ default[:ipynb][:NotebookApp][:certfile] = nil
 # Out[11]: 'eb4a986083f011b8f7a2604265a7282b74964dc2'
 #
 # Default shown here is "IPassword" (without the quotes)
-default[:ipynb][:NotebookApp][:password_hash] = 'sha1:f918d238efbd:4a250470288eb6a41f5df648a39f82606cbd33dd'
+# 'sha1:f918d238efbd:4a250470288eb6a41f5df648a39f82606cbd33dd'
+#
+default[:ipynb][:NotebookApp][:password_hash] = nil
+default[:ipynb][:NotebookApp][:password] = nil
+
 
 # Landing page settings
 default[:ipynb][:NotebookApp][:base_project_url] = nil
@@ -126,9 +130,8 @@ default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
                                       "scipy", "pandas", "matplotlib", "scikit-learn"]
 
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)
-# Default is a commit hash from the evening of July 30, 2013, eagerly waiting the release of IPython 1.0
 # Most of the attributes, configuration, etc. rely on IPython 1.0 so be wary if for some reason you want to use 0.x releases.
-default[:ipynb][:ipython_package] = 'https://1f2133dc3aab4203faba-815b705eb00655bf9ca363d7dfb3b606.ssl.cf2.rackcdn.com/ipython-1.0.0-rc1.tar.gz#egg=ipython-1.0.0-rc1'
+default[:ipynb][:ipython_package] = "ipython"
 
 # All the dependencies for IPython + IPython notebook
 default[:ipynb][:ipython_deps] = ["tornado==3.1",
@@ -139,6 +142,4 @@ default[:ipynb][:ipython_deps] = ["tornado==3.1",
 # Additional packages to install into the same virtualenv as the IPython notebook
 default[:ipynb][:extra_packages] = []
 #default[:ipynb][:extra_packages] = ["bookstore==0.0.4a"]
-
-
 

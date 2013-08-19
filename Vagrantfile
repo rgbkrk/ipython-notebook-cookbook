@@ -39,6 +39,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       :ipynb => {
+         :NotebookApp => {
+            :password => "test"
+         },
          # Make boot up quicker when simply testing the notebook
          :scientific_stack => [],
       }
