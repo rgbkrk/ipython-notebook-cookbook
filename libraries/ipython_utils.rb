@@ -12,7 +12,7 @@ module IPythonAuth
 
       salt = SecureRandom.hex(6)
       password_hash = hash_alg.hexdigest(password + salt)
-      return hash_name + ':' + salt + ':' + password_hash
+      return [hash_name, salt, password_hash].join(":")
    end
 end
 
