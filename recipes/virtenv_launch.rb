@@ -24,6 +24,7 @@
 node.default[:supervisor][:version] = "3.0"
 
 include_recipe "supervisor"
+include_recipe "nginx"
 
 # Create the directory for storing notebooks
 directory node[:ipynb][:notebook_dir] do
@@ -72,6 +73,8 @@ template nb_config do
    mode 00644
    source "ipython_notebook_config.py.erb"
 end
+
+# Setup nginx forwarding
 
 # Setup an IPython notebook service
 supervisor_service node[:ipynb][:service_name] do
