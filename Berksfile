@@ -9,6 +9,10 @@ cookbook 'python',
 cookbook 'apt'
 cookbook 'yum'
 
+cookbook 'firewall',
+   :git => 'https://github.com/opscode-cookbooks/firewall.git',
+   :ref => '34b9f28ad74bdfcc853661ff5d7bc5868d5610d3'
+
 cookbook 'nginx',
    :git => 'https://github.com/opscode-cookbooks/nginx.git',
    :ref => '38c231ef10d8512422f66311ac2f2b175459ec27'

@@ -24,7 +24,6 @@
 node.default[:supervisor][:version] = "3.0"
 
 include_recipe "supervisor"
-include_recipe "nginx"
 
 # Create the directory for storing notebooks
 directory node[:ipynb][:notebook_dir] do
@@ -74,8 +73,6 @@ template nb_config do
    source "ipython_notebook_config.py.erb"
 end
 
-# Setup nginx forwarding
-
 # Setup an IPython notebook service
 supervisor_service node[:ipynb][:service_name] do
    user node[:ipynb][:linux_user]
@@ -99,3 +96,31 @@ supervisor_service node[:ipynb][:service_name] do
    stopsignal "QUIT"
 end
 
+include_recipe "firewall"
+
+# Setup nginx forwarding if enabled
+if node[:ipynb][:proxy][:enable]
+   include_recipe "nginx"
+   template "/etc/nginx/sites-available/#{node[:ipynb][:proxy][:hostname]}" do
+      source "nginx-proxy.erb"
+      notifies :restart, "service[nginx]"
+   end
+
+   nginx_site "default" do
+      enable false
+   end
+
+   nginx_site node[:ipynb][:proxy][:hostname] do
+      enable true
+   end
+
+   firewall_rule "http" do
+      port 80
+      action :allow
+   end
+else
+   firewall_rule node[:ipynb][:service_name] do
+      port node[:ipynb][:NotebookApp][:port]
+      action :allow
+   end
+end
