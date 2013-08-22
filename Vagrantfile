@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
   # Forward the default 8888 port for the IPython notebook,
   # keeping the port different on the host box in case the user
   # is running the IPython notebook locally
+  config.vm.network :private_network, ip: "33.33.33.10"
   config.vm.network :forwarded_port, guest: 8888, host: 9999
 
   config.ssh.max_tries = 40

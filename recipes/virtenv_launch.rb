@@ -120,9 +120,18 @@ if node[:ipynb][:proxy][:enable]
       port 80
       action :allow
    end
+
+   firewall_rule "https" do
+      port 443
+      action :allow
+   end
+
 else
    firewall_rule node[:ipynb][:service_name] do
       port node[:ipynb][:NotebookApp][:port]
       action :allow
    end
 end
+
+
+

@@ -16,6 +16,9 @@ default[:ipynb][:home_dir] = File.join("/home/", default[:ipynb][:linux_user])
 # Spot to store the notebook files
 default[:ipynb][:notebook_dir] = File.join(default[:ipynb][:home_dir], "notebooks")
 
+# Where to place log files
+default[:ipynb][:log_dir] = "/var/log/ipynb"
+
 # Supervisord service name
 default[:ipynb][:service_name] = "ipynb"
 
@@ -24,6 +27,11 @@ default[:ipynb][:profile_name] = "cooked"
 
 # IPython directory for settings
 default[:ipynb][:ipython_settings_dir] = File.join(default[:ipynb][:home_dir], ".ipython")
+
+# nginx proxying
+default[:ipynb][:proxy][:enable] = true
+default[:ipynb][:proxy][:hostname] = fqdn
+default[:ipynb][:proxy][:alias_hostnames] = []
 
 ########################################
 # IPython Notebook runtime configuration

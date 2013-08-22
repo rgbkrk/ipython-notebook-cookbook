@@ -4,7 +4,7 @@ server {
    # server_name <%= node.ipynb.proxy.hostname %> <%= node.ipynb.proxy.alias_hostnames.join(" ") %>;
 
    access_log off;
-   error_log /var/log/ .......
+   error_log <%= File.join(node[:nginx][:log_dir],'error.log') %>;
 
    location / {
       proxy_pass http://localhost:<%= node[:ipynb][:NotebookApp][:port] %>;
