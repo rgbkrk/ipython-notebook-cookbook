@@ -100,7 +100,9 @@ include_recipe "firewall"
 
 # Setup nginx forwarding if enabled
 if node[:ipynb][:proxy][:enable]
+
    include_recipe "nginx"
+
    template "/etc/nginx/sites-available/#{node[:ipynb][:proxy][:hostname]}" do
       source "nginx-proxy.erb"
       notifies :restart, "service[nginx]"

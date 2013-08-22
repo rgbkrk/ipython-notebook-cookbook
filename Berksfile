@@ -15,7 +15,7 @@ cookbook 'firewall',
 
 cookbook 'nginx',
    :git => 'https://github.com/opscode-cookbooks/nginx.git',
-   :ref => '38c231ef10d8512422f66311ac2f2b175459ec27'
+   :ref => '682f366d7133db23ac736a6923c8fdfa96a88b65'
 
 cookbook 'supervisor',
    :git => 'https://github.com/opscode-cookbooks/supervisor.git',

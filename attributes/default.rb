@@ -144,5 +144,4 @@ default[:ipynb][:ipython_deps] = ["tornado==3.1",
 
 # Additional packages to install into the same virtualenv as the IPython notebook
 default[:ipynb][:extra_packages] = []
-#default[:ipynb][:extra_packages] = ["bookstore==0.0.4a"]
 
