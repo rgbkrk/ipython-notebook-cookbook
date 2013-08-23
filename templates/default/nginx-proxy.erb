@@ -1,12 +1,16 @@
 server {
-   listen 80;
-   # If necessary, set server name
-   # server_name <%= node.ipynb.proxy.hostname %> <%= node.ipynb.proxy.alias_hostnames.join(" ") %>;
+    listen 80;
+    rewrite        ^ https://$host$request_uri? permanent;
+}
 
-   access_log off;
-   error_log <%= File.join(node[:nginx][:log_dir],'error.log') %>;
+server {
+    listen 443 default ssl;
+    ssl_certificate <%= node[:ipynb][:ssl_certificate] %>;
+    ssl_certificate_key <%= node[:ipynb][:ssl_certificate_key] %>;
 
-   location / {
+    error_log <%= File.join(node[:nginx][:log_dir],'error.log') %>;
+
+    location / {
       proxy_pass http://localhost:<%= node[:ipynb][:NotebookApp][:port] %>;
       proxy_set_header Host $host;
       proxy_buffering off;

@@ -20,10 +20,12 @@ c = get_config()
 # Choices: ['tk', 'qt', 'wx', 'gtk', 'osx', 'inline', 'auto']
 c.IPKernelApp.pylab = '<%= node[:ipynb][:NotebookApp][:pylab] %>'
 <% end %>
-<% unless node[:ipynb][:NotebookApp][:certfile].nil? %>
+<% unless node[:ipynb][:proxy][:enable] %>
+    <% unless node[:ipynb][:NotebookApp][:certfile].nil? %>
 
 # SSL Certificate
 c.NotebookApp.certfile = '<%= node[:ipynb][:NotebookApp][:certfile] %>'
+    <% end %>
 <% end %>
 <% unless node[:ipynb][:NotebookApp][:ip].nil? %>
 

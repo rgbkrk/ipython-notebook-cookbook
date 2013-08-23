@@ -16,9 +16,6 @@ default[:ipynb][:home_dir] = File.join("/home/", default[:ipynb][:linux_user])
 # Spot to store the notebook files
 default[:ipynb][:notebook_dir] = File.join(default[:ipynb][:home_dir], "notebooks")
 
-# Where to place log files
-default[:ipynb][:log_dir] = "/var/log/ipynb"
-
 # Supervisord service name
 default[:ipynb][:service_name] = "ipynb"
 
@@ -59,8 +56,10 @@ default[:ipynb][:NotebookApp][:open_browser] = 'False'
 #
 #   http://arstechnica.com/security/news/2009/12/how-to-get-set-with-a-
 #
-default[:ipynb][:NotebookApp][:certfile] = nil
-default[:ipynb][:NotebookApp][:certificate_text] = nil
+default[:ipynb][:ssl_certificate] = nil
+default[:ipynb][:ssl_certificate_text] = nil
+default[:ipynb][:ssl_certificate_key] = nil
+default[:ipynb][:ssl_certificate_key_text] = nil
 
 # Hashed Password with Salt, Algorithm for accessing the IPython Notebook
 #
@@ -124,7 +123,7 @@ default[:ipynb][:system_packages] = %w{
    libamd2.2.0 libjpeg-turbo8 libjpeg8 liblcms1 libumfpack5.4.0 python-imaging
    libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
    libcurl4-gnutls-dev python-pycurl-dbg git-core
-   python-egenix-mxdatetime vim python-numpy python-scipy
+   python-egenix-mxdatetime vim python-numpy python-scipy pandoc
 }
 
 ########################################
@@ -137,7 +136,7 @@ default[:ipynb][:system_packages] = %w{
 default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
                                       "python-dateutil", "pytz==2013b", "six",
                                       "scipy", "pandas", "matplotlib", "scikit-learn",
-                                      "pygments"
+                                      "pygments", "readline", "nose", "pexpect"
                                      ]
 
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)

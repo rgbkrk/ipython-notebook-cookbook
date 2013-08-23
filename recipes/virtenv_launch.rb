@@ -33,21 +33,6 @@ directory node[:ipynb][:notebook_dir] do
    action :create
 end
 
-# If certificate file is passed as an attribute
-unless node[:ipynb][:NotebookApp][:certificate_text].nil?
-   # Sets a default spot for the certificate file
-   if node[:ipynb][:NotebookApp][:certfile].nil?
-         node.set[:ipynb][:NotebookApp][:certfile] = File.join(node[:ipynb][:home_dir], "cert.pem")
-   end
-   file node[:ipynb][:NotebookApp][:certfile] do
-      owner node[:ipynb][:linux_user]
-      group node[:ipynb][:linux_group]
-      mode '0600'
-      action :create
-      content node[:ipynb][:NotebookApp][:certificate_text]
-   end
-end
-
 ipynb_profile node[:ipynb][:profile_name] do
    action :create
    owner node[:ipynb][:linux_user]
@@ -96,7 +81,24 @@ supervisor_service node[:ipynb][:service_name] do
    stopsignal "QUIT"
 end
 
-include_recipe "firewall"
+def cert_up(cert_file, cert_file_text)
+    # If certificate file is passed as an attribute
+    unless node[:ipynb][cert_file_text].nil?
+       # Set a default spot for the certificate file
+       file node[:ipynb][cert_file] do
+          owner node[:ipynb][:linux_user]
+          group node[:ipynb][:linux_group]
+          mode '0600'
+          action :create
+          content node[:ipynb][cert_file_text]
+       end
+    end
+end
+
+cert_up(:ssl_certificate, :ssl_certificate_text)
+cert_up(:ssl_certificate_key, :ssl_certificate_key_text)
+
+#include_recipe "firewall"
 
 # Setup nginx forwarding if enabled
 if node[:ipynb][:proxy][:enable]
@@ -116,21 +118,21 @@ if node[:ipynb][:proxy][:enable]
       enable true
    end
 
-   firewall_rule "http" do
-      port 80
-      action :allow
-   end
+   #firewall_rule "http" do
+   #   port 80
+   #   action :allow
+   #end
 
-   firewall_rule "https" do
-      port 443
-      action :allow
-   end
+   #firewall_rule "https" do
+   #   port 443
+   #   action :allow
+   #end
 
 else
-   firewall_rule node[:ipynb][:service_name] do
-      port node[:ipynb][:NotebookApp][:port]
-      action :allow
-   end
+   #firewall_rule node[:ipynb][:service_name] do
+   #   port node[:ipynb][:NotebookApp][:port]
+   #   action :allow
+   #end
 end
 
 

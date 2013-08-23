@@ -42,7 +42,10 @@ Vagrant.configure("2") do |config|
       :ipynb => {
          :NotebookApp => {
             :password => "test",
-            :certificate_text => <<-eos
+         },
+         :ssl_certificate => "/etc/nginx/ssl.pem",
+         :ssl_certificate_key => "/etc/nginx/ssl.key",
+         :ssl_certificate_key_text => <<-eos,
 -----BEGIN RSA PRIVATE KEY-----
 MIICXQIBAAKBgQDKDv8EmwzlrhoN7XknVNDyZFMC3eQl60fSrNgjYjMojMmNlrRx
 p770h5Y9dosEuQXuXMbYyvyQpQemDWiQEt6rkGhOB5lZ9NheWn6nnW+9YBbtwkqz
@@ -58,6 +61,8 @@ YVl5QPMo0CVmSKBR5bHA1DYwBXj9CrID/qA3wX/9TGXwIDHIL47OAH9oaee1uFT4
 mJJqMBK3AM4G53mogXAFAkBSpcRbCXlWBUJjGiE9qrpaqrDhncNhMA5zqxkxmGEF
 WfBxaOjp9wsQZZHX+bSQLp92WjW0Uq712dtL7CVOWqxb
 -----END RSA PRIVATE KEY-----
+eos
+         :ssl_certificate_text => <<-eos,
 -----BEGIN CERTIFICATE-----
 MIICmDCCAgGgAwIBAgIJAONj1DIGs9lkMA0GCSqGSIb3DQEBBQUAMD0xCzAJBgNV
 BAYTAlVTMQswCQYDVQQIEwJUWDEhMB8GA1UEChMYSW50ZXJuZXQgV2lkZ2l0cyBQ
@@ -74,8 +79,7 @@ hvcNAQEFBQADgYEAUxagzwBN/fCJlKh1eIdO/oWBqtt9Ca70VSylD0WJrtgznreG
 fZJ4bEzYsCAsWcQowSmEkzQeXzB60EUT3I09SbyFe7+JD+/CGiBfET42ABGwGNUV
 dE3w7J7Coc46rYXAqMg05hBYrOe43nra2RHTFxQr5V+oDLMcZuPI2Ozo4e4=
 -----END CERTIFICATE-----
-            eos
-         },
+eos
          # Make boot up quicker when simply testing the notebook
          :scientific_stack => [],
       }
