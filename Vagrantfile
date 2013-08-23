@@ -88,6 +88,7 @@ eos
     chef.run_list = [
         "recipe[apt]",
         "recipe[yum]",
+        "recipe[nginx]",
         "recipe[ipynb::default]",
         "recipe[ipynb::virtenv_launch]"
     ]
