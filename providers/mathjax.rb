@@ -1,7 +1,7 @@
 #
 # Author:: Kyle Kelley <rgbkrk@gmail.com>
 # Cookbook Name:: ipynb
-# Provider:: profile
+# Provider:: mathjax
 #
 # Copyright:: 2013, Rackspace
 #
@@ -19,22 +19,19 @@
 #
 
 action :create do
-   Chef::Log.info("Creating profile \"#{new_resource.name}\" for #{new_resource.owner}")
+   Chef::Log.info("Installing mathjax to \"#{new_resource.name}\" for #{new_resource.owner}")
    Chef::Log.info("IPython path is at #{new_resource.ipython_path}")
-   create_profile(new_resource.ipython_path, new_resource.owner, new_resource.name)
+   install_mathjax(new_resource.ipython_path, new_resource.owner, new_resource.name)
 end
 
-def create_profile(ipython_path, owner, name)
+def install_mathjax(ipython_path, owner, name)
    bash "create_profile" do
       user owner
       group owner
       code <<-EOH
-      #{ipython_path} profile create --profile=#{name} --ipython-dir #{node[:ipynb][:ipython_settings_dir]}
+      #{ipython_path} -c 'import os; from IPython.external.mathjax import install_mathjax; from IPython.utils.path import locate_profile; dest=os.path.join(locate_profile(#{name}), 'static', 'mathjax'); install_mathjax(replace=True, dest=dest);'
       EOH
       environment
    end
 end
 
-# Create a provider that installs mathjax locally
-# #{ipython_path} -c 'from IPython.external import mathjax; mathjax.install_mathjax()' --profile=#{name}
-# Check for existence in profile

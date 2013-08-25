@@ -39,6 +39,12 @@ ipynb_profile node[:ipynb][:profile_name] do
    ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
 end
 
+ipynb_mathjax node[:ipynb][:profile_name] do
+   action :create
+   owner node[:ipynb][:linux_user]
+   ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
+end
+
 profile_dir = File.join(node[:ipynb][:ipython_settings_dir], "profile_" + node[:ipynb][:profile_name])
 
 nb_config = File.join(profile_dir, "ipython_notebook_config.py")
