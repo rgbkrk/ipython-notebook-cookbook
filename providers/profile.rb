@@ -35,6 +35,3 @@ def create_profile(ipython_path, owner, name)
    end
 end
 
-# Create a provider that installs mathjax locally
-# #{ipython_path} -c 'from IPython.external import mathjax; mathjax.install_mathjax()' --profile=#{name}
-# Check for existence in profile

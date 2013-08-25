@@ -101,15 +101,16 @@ def cert_up(cert_file, cert_file_text)
     end
 end
 
-cert_up(:ssl_certificate, :ssl_certificate_text)
-cert_up(:ssl_certificate_key, :ssl_certificate_key_text)
-
 #include_recipe "firewall"
 
 # Setup nginx forwarding if enabled
 if node[:ipynb][:proxy][:enable]
+   Chef::Log.info("Attempting nginx source install")
+   include_recipe "nginx::source"
+   Chef::Log.info("Doneish")
 
-   include_recipe "nginx"
+   cert_up(:ssl_certificate, :ssl_certificate_text)
+   cert_up(:ssl_certificate_key, :ssl_certificate_key_text)
 
    template "/etc/nginx/sites-available/#{node[:ipynb][:proxy][:hostname]}" do
       source "nginx-proxy.erb"

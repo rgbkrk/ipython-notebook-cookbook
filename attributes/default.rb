@@ -1,10 +1,12 @@
-##############################################
+################################################################################
+#
 # IPython Notebook Cookbook Default Attributes
-##############################################
+#
+################################################################################
 
-########################################
+################################################################################
 # Server side configuration
-########################################
+################################################################################
 
 # linux user and group for the system IPython is being deployed to
 default[:ipynb][:linux_user] = "ipynb"
@@ -25,14 +27,24 @@ default[:ipynb][:profile_name] = "cooked"
 # IPython directory for settings
 default[:ipynb][:ipython_settings_dir] = File.join(default[:ipynb][:home_dir], ".ipython")
 
-# nginx proxying
+################################################################################
+# NGINX proxying
+#
+# nginx version must be greater than 1.3.13/1.4.x in order to support
+# web sockets (for interacting with the IPython kernel)
+#
+# http://nginx.org/download/nginx-1.4.2.tar.gz
+
+default[:nginx][:default_site_enabled] = false
+default[:nginx][:version] = "1.4.2"
+default[:nginx][:source][:modules] = ["http_gzip_static_module", "http_ssl_module"]
 default[:ipynb][:proxy][:enable] = true
 default[:ipynb][:proxy][:hostname] = fqdn
 default[:ipynb][:proxy][:alias_hostnames] = []
 
-########################################
+################################################################################
 # IPython Notebook runtime configuration
-########################################
+################################################################################
 
 # Pick how plots are done
 default[:ipynb][:NotebookApp][:pylab] = 'inline'
@@ -101,9 +113,9 @@ default[:ipynb][:NotebookApp][:base_project_url] = nil
 default[:ipynb][:NotebookApp][:base_kernel_url] = nil
 default[:ipynb][:NotebookApp][:webapp_settings][:static_url_prefix] = nil
 
-########################################
+################################################################################
 # Virtualenv
-########################################
+################################################################################
 
 # Where to store the virtual environment IPython runs in
 default[:ipynb][:virtenv] = File.join(default[:ipynb][:home_dir], "ipyvirt")
@@ -111,12 +123,13 @@ default[:ipynb][:virtenv] = File.join(default[:ipynb][:home_dir], "ipyvirt")
 # Version of Python to use
 default[:ipynb][:py_version] = "python2.7"
 
-########################################
+################################################################################
 # Software Stack (system packages)
-########################################
+################################################################################
 
 # System packages, at least for Ubuntu (naming may change)
 default[:ipynb][:system_packages] = %w{
+   build-essential libcurl4-openssl-dev libssl-dev zlib1g-dev libpcre3-dev
    gfortran libblas-dev libblas3gf liblapack3gf liblapack-dev
    libatlas-dev libatlas-base-dev libscalapack-mpi1 libscalapack-pvm1
    liblcms-utils python-imaging-doc python-imaging-dbg
@@ -126,9 +139,9 @@ default[:ipynb][:system_packages] = %w{
    python-egenix-mxdatetime vim python-numpy python-scipy pandoc
 }
 
-########################################
+################################################################################
 # Software Stack (pip installs)
-########################################
+################################################################################
 
 # The scientific computing stack, installed in order
 # Note that numpy must be first and the dependencies for matplotlib also have

@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
   config.omnibus.chef_version = "11.4.0"
 
   # Default to using Ubuntu, unless specified otherwise
+  # CentOS support is not enabled for this cookbook yet
   case ENV['VMBOX']
   when 'centos64'
     config.vm.box = "CentOS-6.4-x86_64-minimal"
@@ -39,6 +40,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
+      :nginx => {
+          :version => "1.4.2"
+      },
       :ipynb => {
          :NotebookApp => {
             :password => "test",
@@ -88,7 +92,7 @@ eos
     chef.run_list = [
         "recipe[apt]",
         "recipe[yum]",
-        "recipe[nginx]",
+        "recipe[nginx::source]",
         "recipe[ipynb::default]",
         "recipe[ipynb::virtenv_launch]"
     ]
