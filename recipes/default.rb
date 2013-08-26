@@ -46,6 +46,8 @@ end
 node[:ipynb][:scientific_stack].each do |pkg|
    python_pip pkg do
       virtualenv node[:ipynb][:virtenv]
+      user node[:ipynb][:linux_user]
+      group node[:ipynb][:linux_group]
       action :install
    end
 end
@@ -54,6 +56,8 @@ end
 node[:ipynb][:ipython_deps].each do |pkg|
    python_pip pkg do
       virtualenv node[:ipynb][:virtenv]
+      user node[:ipynb][:linux_user]
+      group node[:ipynb][:linux_group]
       action :install
    end
 end
@@ -61,6 +65,8 @@ end
 # IPython proper
 python_pip node[:ipynb][:ipython_package] do
    virtualenv node[:ipynb][:virtenv]
+   user node[:ipynb][:linux_user]
+   group node[:ipynb][:linux_group]
    action :install
 end
 
@@ -68,6 +74,8 @@ end
 node[:ipynb][:extra_packages].each do |pkg|
    python_pip pkg do
       virtualenv node[:ipynb][:virtenv]
+      user node[:ipynb][:linux_user]
+      group node[:ipynb][:linux_group]
       action :install
    end
 end

@@ -27,6 +27,6 @@ def initialize(*args)
    @action = :create
 end
 
-attribute :owner, :regex => [ /^([a-z]|[A-Z]|[0-9]|_|-)+$/, /^\d+$/ ], :default => node[:ipynb][:linux_user]
+attribute :owner, :regex =>  Chef::Config[:user_valid_regex], :default => node[:ipynb][:linux_user]
 attribute :ipython_path, :kind_of => String, :default => "#{node[:ipynb][:virtenv]}/bin/ipython"
 

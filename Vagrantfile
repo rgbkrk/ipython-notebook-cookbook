@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.hostname = "ipynb-cookbook-berkshelf"
 
-  config.omnibus.chef_version = "11.4.0"
+  config.omnibus.chef_version = "11.6.0"
 
   # Default to using Ubuntu, unless specified otherwise
   # CentOS support is not enabled for this cookbook yet
