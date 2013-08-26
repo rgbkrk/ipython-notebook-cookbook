@@ -25,13 +25,26 @@ action :create do
 end
 
 def install_mathjax(ipython_path, owner, name)
-   bash "install_mathjax" do
-      user owner
-      group owner
-      code <<-EOH
-      #{ipython_path} -c 'import os; from IPython.external.mathjax import install_mathjax; from IPython.utils.path import locate_profile; dest=os.path.join(locate_profile(#{name}), 'static', 'mathjax'); install_mathjax(replace=True, dest=dest); print("**** Installed to {}".format(dest));'
-      EOH
-      environment
+
+   python "install_mathjax" do
+       user owner
+       group owner
+       cwd node[:ipynb][:home_dir]
+
+       environment "HOME" => node[:ipynb][:home_dir],
+                   "SHELL" => "/bin/bash",
+                   "USER" => node[:ipynb][:linux_user],
+                   "PATH" => "#{node[:ipynb][:virtenv]}/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games",
+                   "VIRTUAL_ENV" => "#{node[:ipynb][:virtenv]}"
+
+       code <<-EOH
+import os
+from IPython.external.mathjax import install_mathjax
+from IPython.utils.path import locate_profile
+dest = os.path.join(locate_profile('#{name}'), 'static', 'mathjax')
+install_mathjax(replace=True, dest=dest)
+       EOH
    end
+
 end
 
