@@ -19,12 +19,12 @@
 #
 
 action :create do
-   Chef::Log.info("Installing mathjax to \"#{new_resource.name}\" for #{new_resource.owner}")
-   Chef::Log.info("IPython path is at #{new_resource.ipython_path}")
-   install_mathjax(new_resource.ipython_path, new_resource.owner, new_resource.name)
+   Chef::Log.info("Installing mathjax to\"#{new_resource.install_dir}\" for #{new_resource.owner}")
+   Chef::Log.info("Using IPython at #{new_resource.ipython_path}")
+   install_mathjax(new_resource.install_dir, new_resource.ipython_path, new_resource.owner)
 end
 
-def install_mathjax(ipython_path, owner, name)
+def install_mathjax(install_dir, ipython_path, owner)
 
    python "install_mathjax" do
        user owner
@@ -38,11 +38,8 @@ def install_mathjax(ipython_path, owner, name)
                    "VIRTUAL_ENV" => "#{node[:ipynb][:virtenv]}"
 
        code <<-EOH
-import os
 from IPython.external.mathjax import install_mathjax
-from IPython.utils.path import locate_profile
-dest = os.path.join(locate_profile('#{name}'), 'static', 'mathjax')
-install_mathjax(replace=True, dest=dest)
+install_mathjax(replace=True, dest=#{install_dir})
        EOH
    end
 

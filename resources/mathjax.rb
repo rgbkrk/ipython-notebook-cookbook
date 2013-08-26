@@ -27,6 +27,7 @@ def initialize(*args)
    @action = :create
 end
 
+attribute :install_dir
 attribute :owner, :regex =>  Chef::Config[:user_valid_regex], :default => node[:ipynb][:linux_user]
 attribute :ipython_path, :kind_of => String, :default => "#{node[:ipynb][:virtenv]}/bin/ipython"
 

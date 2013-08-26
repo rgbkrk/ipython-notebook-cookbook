@@ -30,19 +30,29 @@ directory node[:ipynb][:notebook_dir] do
    action :create
 end
 
+# Make sure the default profile exists, to deal with strangeness
+ipynb_profile 'default' do
+   action :create
+   owner node[:ipynb][:linux_user]
+   ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
+end
+
 ipynb_profile node[:ipynb][:profile_name] do
    action :create
    owner node[:ipynb][:linux_user]
    ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
 end
 
-ipynb_mathjax node[:ipynb][:profile_name] do
+ipynb_mathjax "MathJax!" do
    action :create
    owner node[:ipynb][:linux_user]
    ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
+   install_dir File.join(node[:ipynb][:virtenv], "lib", node[:ipynb][:py_version],
+                         "site-packages/IPython/html/static/mathjax")
 end
 
-profile_dir = File.join(node[:ipynb][:ipython_settings_dir], "profile_" + node[:ipynb][:profile_name])
+profile_dir = File.join(node[:ipynb][:ipython_settings_dir],
+                        "profile_" + node[:ipynb][:profile_name])
 
 nb_config = File.join(profile_dir, "ipython_notebook_config.py")
 
