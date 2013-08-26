@@ -40,9 +40,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.json = {
-      :nginx => {
-          :version => "1.4.2"
-      },
       :ipynb => {
          :NotebookApp => {
             :password => "test",
@@ -85,7 +82,7 @@ dE3w7J7Coc46rYXAqMg05hBYrOe43nra2RHTFxQr5V+oDLMcZuPI2Ozo4e4=
 -----END CERTIFICATE-----
 eos
          # Make boot up quicker when simply testing the notebook
-         :scientific_stack => [],
+         #:scientific_stack => [],
       }
     }
 
