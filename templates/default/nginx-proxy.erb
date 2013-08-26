@@ -8,6 +8,10 @@ server {
     ssl on;
     ssl_certificate <%= node[:ipynb][:ssl_certificate] %>;
     ssl_certificate_key <%= node[:ipynb][:ssl_certificate_key] %>;
+    ssl_session_timeout 5m;
+    ssl_protocols SSLv2 SSLv3 TLSv1;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
 
     error_log <%= File.join(node[:nginx][:log_dir],'error.log') %>;
 
@@ -19,7 +23,7 @@ server {
       proxy_pass http://localhost:<%= node[:ipynb][:NotebookApp][:port] %>;
 
       #proxy_set_header X-Real-IP $remote_addr;
-      #proxy_set_header Host $http_host;
+      #proxy_set_header Host $host;
       #proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
       #proxy_set_header X-NginX-Proxy true;

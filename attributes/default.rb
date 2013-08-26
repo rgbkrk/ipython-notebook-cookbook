@@ -16,7 +16,10 @@ default[:ipynb][:linux_group] = "ipynb"
 default[:ipynb][:home_dir] = File.join("/home/", default[:ipynb][:linux_user])
 
 # Spot to store the notebook files
-default[:ipynb][:notebook_dir] = File.join(default[:ipynb][:home_dir], "notebooks")
+default[:ipynb][:notebook_dir] = File.join(default[:ipynb][:home_dir],
+                                           "notebooks")
+
+default[:supervisor][:version] = "3.0"
 
 # Supervisord service name
 default[:ipynb][:service_name] = "ipynb"
@@ -25,19 +28,10 @@ default[:ipynb][:service_name] = "ipynb"
 default[:ipynb][:profile_name] = "cooked"
 
 # IPython directory for settings
-default[:ipynb][:ipython_settings_dir] = File.join(default[:ipynb][:home_dir], ".ipython")
+default[:ipynb][:ipython_settings_dir] = File.join(default[:ipynb][:home_dir],
+                                                   ".ipython")
 
-################################################################################
-# NGINX proxying
-#
-# nginx version must be greater than 1.3.13/1.4.x in order to support
-# web sockets (for interacting with the IPython kernel)
-#
-# http://nginx.org/download/nginx-1.4.2.tar.gz
 
-default[:nginx][:default_site_enabled] = false
-default[:nginx][:version] = "1.4.2"
-default[:nginx][:source][:modules] = ["http_gzip_static_module", "http_ssl_module"]
 default[:ipynb][:proxy][:enable] = true
 default[:ipynb][:proxy][:hostname] = fqdn
 default[:ipynb][:proxy][:alias_hostnames] = []
@@ -55,14 +49,17 @@ default[:ipynb][:NotebookApp][:ip] = '*'
 # Port to host on
 default[:ipynb][:NotebookApp][:port] = 8888
 
-# Choose whether to open a browser, default is server mode (no browser run on server -- interact on client)
+# Choose whether to open a browser, default is server mode (no browser run on
+# server -- interact on client)
 default[:ipynb][:NotebookApp][:open_browser] = 'False'
 
-# SSL Certificate file (private), should be the absolute path of the PEM file you want to use.
+# SSL Certificate file (private), should be the absolute path of the PEM file
+# you want to use.
 #
 # Example for self-generating:
 #
-#   openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+#   openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out \
+#   mycert.pem
 #
 # Can acquire a signed certificate by following this tutorial, through StartSSL:
 #
@@ -86,7 +83,8 @@ default[:ipynb][:ssl_certificate_key_text] = nil
 #
 # The structure of the result is ALGORITHM:SALT:HASH.
 #
-# Roughly speaking the password is converted to UTF-8 (when in Python 2.7) using string.encode
+# Roughly speaking the password is converted to UTF-8 (when in Python 2.7) using
+# string.encode
 #
 # >>> user_password = "IPassword"
 # >>> normalized_password = user_password.encode("utf-8", "replace")
@@ -146,9 +144,9 @@ default[:ipynb][:system_packages] = %w{
 # The scientific computing stack, installed in order
 # Note that numpy must be first and the dependencies for matplotlib also have
 # to start first due to the way numpy+matplotlib are packaged
-default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow",
+default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow", "scipy",
                                       "python-dateutil", "pytz==2013b", "six",
-                                      "scipy", "pandas", "matplotlib", "scikit-learn",
+                                      "scikit-learn", "pandas", "matplotlib",
                                       "pygments", "readline", "nose", "pexpect"
                                      ]
 

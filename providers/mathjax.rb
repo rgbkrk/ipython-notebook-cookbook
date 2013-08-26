@@ -25,11 +25,11 @@ action :create do
 end
 
 def install_mathjax(ipython_path, owner, name)
-   bash "create_profile" do
+   bash "install_mathjax" do
       user owner
       group owner
       code <<-EOH
-      #{ipython_path} -c 'import os; from IPython.external.mathjax import install_mathjax; from IPython.utils.path import locate_profile; dest=os.path.join(locate_profile(#{name}), 'static', 'mathjax'); install_mathjax(replace=True, dest=dest);'
+      #{ipython_path} -c 'import os; from IPython.external.mathjax import install_mathjax; from IPython.utils.path import locate_profile; dest=os.path.join(locate_profile(#{name}), 'static', 'mathjax'); install_mathjax(replace=True, dest=dest); print("**** Installed to {}".format(dest));'
       EOH
       environment
    end
