@@ -116,7 +116,7 @@ default[:ipynb][:NotebookApp][:webapp_settings][:static_url_prefix] = nil
 ################################################################################
 
 # Where to store the virtual environment IPython runs in
-default[:ipynb][:virtenv] = File.join(default[:ipynb][:home_dir], "ipyvirt")
+default[:ipynb][:virtenv] = File.join(default[:ipynb][:home_dir], ".ipyvirt")
 
 # Version of Python to use
 default[:ipynb][:py_version] = "python2.7"
