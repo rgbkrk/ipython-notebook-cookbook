@@ -44,7 +44,7 @@ default[:ipynb][:proxy][:alias_hostnames] = []
 default[:ipynb][:NotebookApp][:pylab] = 'inline'
 
 # IP to host on, defaults to all interfaces
-default[:ipynb][:NotebookApp][:ip] = '*'
+default[:ipynb][:NotebookApp][:ip] = '127.0.0.1'
 
 # Port to host on
 default[:ipynb][:NotebookApp][:port] = 8888

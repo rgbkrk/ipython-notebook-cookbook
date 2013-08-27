@@ -35,12 +35,14 @@ ipynb_profile 'default' do
    action :create
    owner node[:ipynb][:linux_user]
    ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
+   ipython_settings_dir node[:ipynb][:ipython_settings_dir]
 end
 
 ipynb_profile node[:ipynb][:profile_name] do
    action :create
    owner node[:ipynb][:linux_user]
    ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
+   ipython_settings_dir node[:ipynb][:ipython_settings_dir]
 end
 
 ipynb_mathjax "MathJax!" do
@@ -108,7 +110,7 @@ def cert_up(cert_file, cert_file_text)
     end
 end
 
-#include_recipe "firewall"
+include_recipe "firewall"
 
 # Setup nginx forwarding if enabled
 if node[:ipynb][:proxy][:enable]
@@ -160,22 +162,21 @@ if node[:ipynb][:proxy][:enable]
       enable true
    end
 
-   #firewall_rule "http" do
-   #   port 80
-   #   action :allow
-   #end
+   firewall_rule "ssh" do
+       port 22
+       action :allow
+   end
 
-   #firewall_rule "https" do
-   #   port 443
-   #   action :allow
-   #end
+   firewall_rule "https" do
+      ports [80, 443]
+      protocol :tcp
+      action :allow
+   end
 
 else
-   #firewall_rule node[:ipynb][:service_name] do
-   #   port node[:ipynb][:NotebookApp][:port]
-   #   action :allow
-   #end
+   firewall_rule node[:ipynb][:service_name] do
+      port node[:ipynb][:NotebookApp][:port]
+      action :allow
+   end
 end
-
-
 
