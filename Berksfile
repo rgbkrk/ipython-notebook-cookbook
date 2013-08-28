@@ -9,10 +9,6 @@ cookbook 'python',
 cookbook 'apt'
 cookbook 'yum'
 
-cookbook 'firewall',
-   :git => 'https://github.com/opscode-cookbooks/firewall.git',
-   :ref => '34b9f28ad74bdfcc853661ff5d7bc5868d5610d3'
-
 cookbook 'runit'
 
 cookbook 'nginx',
@@ -22,6 +18,5 @@ cookbook 'nginx',
 cookbook 'supervisor',
    :git => 'https://github.com/opscode-cookbooks/supervisor.git',
    :ref => '3bcf67b4541554a013c2d5a99ac204eb33fd9dd4'
-
 
 metadata

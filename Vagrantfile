@@ -83,6 +83,7 @@ eos
         "recipe[yum]",
         "recipe[ipynb::default]",
         "recipe[ipynb::virtenv_launch]"
+        "recipe[ipynb::proxy]"
     ]
   end
 end
