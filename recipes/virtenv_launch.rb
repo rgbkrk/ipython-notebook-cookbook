@@ -101,8 +101,8 @@ def cert_up(cert_file, cert_file_text)
     unless node[:ipynb][cert_file_text].nil?
        # Set a default spot for the certificate file
        file node[:ipynb][cert_file] do
-          owner node[:ipynb][:linux_user]
-          group node[:ipynb][:linux_group]
+          owner 'root'
+          group 'root'
           mode '0600'
           action :create
           content node[:ipynb][cert_file_text]
@@ -167,10 +167,11 @@ if node[:ipynb][:proxy][:enable]
        action :allow
    end
 
-   firewall_rule "https" do
-      ports [80, 443]
-      protocol :tcp
-      action :allow
+   [22, 80].each do |prt|
+       firewall_rule prt do
+           port prt
+           action :allow
+       end
    end
 
 else
