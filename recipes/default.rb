@@ -41,8 +41,7 @@ python_virtualenv node[:ipynb][:virtenv] do
    action :create
 end
 
-# Install the entire scientific computing stack, including numpy, scipy,
-# matplotlib, and pandas
+# Install the entire scientific computing stack
 node[:ipynb][:scientific_stack].each do |pkg|
    python_pip pkg do
       virtualenv node[:ipynb][:virtenv]
