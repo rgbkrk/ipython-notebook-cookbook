@@ -12,6 +12,15 @@ This cookbook targets IPython 1.0.0 and will not deploy 0.x releases.
 
 # Usage
 
+## Include this cookbook
+
+This cookbook isn't on opscode (yet), so for now you'll have to use Berkshelf and point to it in your Berksfile
+
+```ruby
+cookbook 'ipynb',
+  :git => 'https://github.com/rgbkrk/ipynb-cookbook'
+```
+
 ## Bootstrap VirtualBox
 
     vagrant up
