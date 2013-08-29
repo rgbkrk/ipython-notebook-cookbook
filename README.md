@@ -2,7 +2,7 @@
 
 Sets up an IPython Notebook server using Chef.
 
-Configuration/templating features will be coded towards IPython 1.0.0, which has not been released yet.
+This cookbook targets IPython 1.0.0 and will not deploy 0.x releases.
 
 # Requirements
  * [Berkshelf][]: `gem install berks`
@@ -24,13 +24,24 @@ See `attributes/default.rb` for default values. Most values including `:linux_us
 
 Particularly important parameters for configuration of the notebook are located in `node[:ipynb][:NotebookApp]`.
 
+* `node[:ipynb][:NotebookApp][:password]` - Password to use when accessing the notebook. (Please use an encrypted data bag to set this attribute in a real deployment).
+
 If you're using the virtualenv recipe, you can either install more to the same virtualenv (`node[:ipynb][:virtenv]`) or add additional packages to `node[:ipynb][:extra_packages]`.
 
 # Recipes
 
 The `default` recipe simply installs (using system packages) IPython Notebook, numpy, Pandas, matplotlib, and all the dependencies for these.
 
-The `simple_launch` recipe creates user and group *ipynb*, creates a spot to store notebooks, and sets up ipython notebook as a service using supervisord.
+The `virtenv_launch` recipe creates user and group *ipynb*, creates a spot to store notebooks, and sets up ipython notebook as a service using supervisord.
+
+The `proxy` recipe adds an nginx proxy to the notebook and requires you to set the certificate and key attributes.
+
+* `node[:ipynb][:ssl_certificate]` - Location to install the SSL certificate (e.g. /etc/nginx/ssl.crt)
+* `node[:ipynb][:ssl_certificate_text]` - Text for the SSL Certificate
+* `node[:ipynb][:ssl_certificate_key]` - Location to install the SSL private key (e.g. /etc/nginx/ssl.key)
+* `node[:ipynb][:ssl_certificate_key_text]` - Text for the SSL private key
+
+On a real deployment, these should be set using an encrypted data bag.
 
 # Contributing
 
