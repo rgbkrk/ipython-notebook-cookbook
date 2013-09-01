@@ -5,6 +5,11 @@ Sets up an IPython Notebook server using Chef.
 This cookbook targets IPython 1.0.0 and will not deploy 0.x releases.
 
 # Requirements
+
+This cookbook uses Chef 11. Additionally, Berkshelf is recommended but not required.
+
+## Requirements for Vagrant
+
  * [Berkshelf][]: `gem install berks`
  * [Vagrant][] 1.2.4 or higher
  * Berkshelf plugin for Vagrant: `vagrant plugin install vagrant-berkshelf`
@@ -22,6 +27,8 @@ cookbook 'ipynb',
 ```
 
 ## Bootstrap VirtualBox
+
+You can also try it out using Vagrant with VirtualBox.
 
     vagrant up
 
