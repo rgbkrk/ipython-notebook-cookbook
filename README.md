@@ -1,4 +1,4 @@
-# ipynb-cookbook
+# IPython Notebook Cookbook
 
 Sets up an IPython Notebook server using Chef.
 

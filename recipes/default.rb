@@ -13,7 +13,7 @@ include_recipe "python"
 # virtualenv.
 node[:ipynb][:system_packages].each do |pkg|
    package pkg do
-      action :upgrade
+      action :install
    end
 end
 
