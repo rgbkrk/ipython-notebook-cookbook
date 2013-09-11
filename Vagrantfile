@@ -23,9 +23,6 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: "33.33.33.10"
   config.vm.network :forwarded_port, guest: 8888, host: 9999
 
-  config.ssh.max_tries = 40
-  config.ssh.timeout   = 120
-
   # Enabling the Berkshelf plugin. To enable this globally, add this configuration
   # option to your ~/.vagrant.d/Vagrantfile file
   config.berkshelf.enabled = true
