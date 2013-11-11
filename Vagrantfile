@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
   # keeping the port different on the host box in case the user
   # is running the IPython notebook locally
   config.vm.network :private_network, ip: "33.33.33.10"
-  config.vm.network :forwarded_port, guest: 8888, host: 9999
+  config.vm.network :forwarded_port, guest: 80, host: 9999
 
   # Enabling the Berkshelf plugin. To enable this globally, add this configuration
   # option to your ~/.vagrant.d/Vagrantfile file
