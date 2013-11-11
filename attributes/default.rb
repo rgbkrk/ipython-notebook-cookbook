@@ -134,7 +134,7 @@ default[:ipynb][:system_packages] = %w{
    libamd2.2.0 libjpeg-turbo8 libjpeg8 liblcms1 libumfpack5.4.0 python-imaging
    libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
    libcurl4-gnutls-dev python-pycurl-dbg git-core
-   cython libhdf5-serial-1.8.4 libhdf5-serial-dev
+   cython libhdf5-7 libhdf5-serial-dev
    python-egenix-mxdatetime vim python-numpy python-scipy pandoc
 }
 
@@ -145,14 +145,33 @@ default[:ipynb][:system_packages] = %w{
 # The scientific computing stack, installed in order
 # Note that numpy must be first and the dependencies for matplotlib also have
 # to start first due to the way numpy+matplotlib are packaged
-default[:ipynb][:scientific_stack] = ["numpy", "freetype-py", "pillow", "scipy",
-                                      "python-dateutil", "pytz==2013b", "six",
-                                      "scikit-learn", "pandas", "matplotlib",
-                                      "pygments", "readline", "nose", "pexpect",
-                                      "cython", "networkx",
-                                      "numexpr", "tables", "patsy", "statsmodels",
-                                      "sympy", "scikit-image", "h5py", "nltk",
-                                      "theano", "xlrd", "xlwt"
+default[:ipynb][:scientific_stack] = ["numpy",
+                                      "freetype-py",
+                                      "pillow",
+                                      "scipy==0.12.1",
+                                      "python-dateutil",
+                                      "pytz==2013b",
+                                      "six",
+                                      "scikit-learn",
+                                      "pandas",
+                                      "matplotlib",
+                                      "pygments",
+                                      "readline",
+                                      "nose",
+                                      "pexpect",
+                                      "cython",
+                                      "networkx",
+                                      "numexpr",
+                                      "tables",
+                                      "patsy",
+                                      "statsmodels",
+                                      "sympy",
+                                      "scikit-image",
+                                      "h5py",
+                                      "nltk",
+                                      "theano",
+                                      "xlrd",
+                                      "xlwt"
                                      ]
 
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)

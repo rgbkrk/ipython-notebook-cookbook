@@ -41,6 +41,14 @@ python_virtualenv node[:ipynb][:virtenv] do
    action :create
 end
 
+# Make sure uwsgi gets installed
+python_pip "uwsgi" do
+   virtualenv node[:ipynb][:virtenv]
+   user node[:ipynb][:linux_user]
+   group node[:ipynb][:linux_group]
+   action :install
+end
+
 # Install the entire scientific computing stack
 node[:ipynb][:scientific_stack].each do |pkg|
    python_pip pkg do

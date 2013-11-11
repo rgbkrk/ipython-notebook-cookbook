@@ -14,8 +14,8 @@ Vagrant.configure("2") do |config|
 
   config.omnibus.chef_version = "11.6.0"
 
-  config.vm.box = "opscode-ubuntu-12.04"
-  config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
+  config.vm.box = "opscode-ubuntu-13.04"
+  config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box"
 
   # Forward the default 8888 port for the IPython notebook,
   # keeping the port different on the host box in case the user
@@ -35,6 +35,7 @@ Vagrant.configure("2") do |config|
          },
          :ssl_certificate => "/etc/nginx/ssl.pem",
          :ssl_certificate_key => "/etc/nginx/ssl.key",
+         # Note: Don't use this key in production -- this is just a vagrant testing key
          :ssl_certificate_key_text => <<-eos,
 -----BEGIN RSA PRIVATE KEY-----
 MIICXQIBAAKBgQDKDv8EmwzlrhoN7XknVNDyZFMC3eQl60fSrNgjYjMojMmNlrRx
