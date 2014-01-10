@@ -13,11 +13,11 @@ default[:ipynb][:linux_user] = "ipynb"
 default[:ipynb][:linux_group] = "ipynb"
 
 # Home directory for the system user
-default[:ipynb][:home_dir] = File.join("/home/", default[:ipynb][:linux_user])
+default[:ipynb][:home_dir] = nil #File.join("/home/", default[:ipynb][:linux_user])
 
 # Spot to store the notebook files
-default[:ipynb][:notebook_dir] = File.join(default[:ipynb][:home_dir],
-                                           "notebooks")
+default[:ipynb][:notebook_dir] = nil #File.join(default[:ipynb][:home_dir],
+                                     #      "notebooks")
 
 default[:supervisor][:version] = "3.0"
 
@@ -26,11 +26,6 @@ default[:ipynb][:service_name] = "ipynb"
 
 # IPython profile
 default[:ipynb][:profile_name] = "cooked"
-
-# IPython directory for settings
-default[:ipynb][:ipython_settings_dir] = File.join(default[:ipynb][:home_dir],
-                                                   ".ipython")
-
 
 default[:ipynb][:proxy][:enable] = true
 default[:ipynb][:proxy][:hostname] = fqdn
@@ -116,7 +111,7 @@ default[:ipynb][:NotebookApp][:webapp_settings][:static_url_prefix] = nil
 ################################################################################
 
 # Where to store the virtual environment IPython runs in
-default[:ipynb][:virtenv] = File.join(default[:ipynb][:home_dir], ".ipyvirt")
+default[:ipynb][:virtenv] = nil #File.join(default[:ipynb][:home_dir], ".ipyvirt")
 
 # Version of Python to use
 default[:ipynb][:py_version] = "python2.7"
