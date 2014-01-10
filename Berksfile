@@ -4,8 +4,11 @@ site :opscode
 
 # Locking version of the python cookbook that uses setuptools instead of distribute
 cookbook 'python',
-   :git => 'https://github.com/opscode-cookbooks/python.git',
-   :ref => '345c56acefdd8670938cd7d29a19fc5394aad9fc'
+    :git => 'https://github.com/comandrei/python.git',
+    :ref => '2cc384b5d996ca8b701826af265334bda40d0201'
+#   :git => 'https://github.com/poise/python.git',
+#   :ref => '8ce88cd17b0d6c64e948f1580815b5884b3c0f26'
+
 cookbook 'apt'
 cookbook 'yum'
 
@@ -16,7 +19,7 @@ cookbook 'nginx',
    :ref => 'd7a41ce15b30f91df95195b213d95bb9b3a6c4c3'
 
 cookbook 'supervisor',
-   :git => 'https://github.com/opscode-cookbooks/supervisor.git',
-   :ref => '3bcf67b4541554a013c2d5a99ac204eb33fd9dd4'
+   :git => 'https://github.com/poise/supervisor.git',
+   :ref => 'ffd88b59e3df97613b9ecfd53d489f6715551755'
 
 metadata

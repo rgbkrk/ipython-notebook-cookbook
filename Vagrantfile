@@ -27,7 +27,11 @@ Vagrant.configure("2") do |config|
   # option to your ~/.vagrant.d/Vagrantfile file
   config.berkshelf.enabled = true
 
+
   config.vm.provision :chef_solo do |chef|
+
+    chef.log_level = :debug
+
     chef.json = {
       :ipynb => {
          :NotebookApp => {

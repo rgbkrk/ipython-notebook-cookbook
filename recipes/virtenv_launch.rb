@@ -22,6 +22,8 @@
 
 include_recipe "supervisor"
 
+ipython_settings_dir = File.join(node[:ipynb][:home_dir], ".ipython")
+
 # Create the directory for storing notebooks
 directory node[:ipynb][:notebook_dir] do
    owner node[:ipynb][:linux_user]
@@ -35,14 +37,14 @@ ipynb_profile 'default' do
    action :create
    owner node[:ipynb][:linux_user]
    ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
-   ipython_settings_dir node[:ipynb][:ipython_settings_dir]
+   ipython_settings_dir ipython_settings_dir
 end
 
 ipynb_profile node[:ipynb][:profile_name] do
    action :create
    owner node[:ipynb][:linux_user]
    ipython_path "#{node[:ipynb][:virtenv]}/bin/ipython"
-   ipython_settings_dir node[:ipynb][:ipython_settings_dir]
+   ipython_settings_dir ipython_settings_dir
 end
 
 ipynb_mathjax "MathJax!" do
@@ -53,7 +55,7 @@ ipynb_mathjax "MathJax!" do
                          "site-packages/IPython/html/static/mathjax")
 end
 
-profile_dir = File.join(node[:ipynb][:ipython_settings_dir],
+profile_dir = File.join(ipython_settings_dir,
                         "profile_" + node[:ipynb][:profile_name])
 
 nb_config = File.join(profile_dir, "ipython_notebook_config.py")

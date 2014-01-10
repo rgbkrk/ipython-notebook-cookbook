@@ -13,11 +13,11 @@ default[:ipynb][:linux_user] = "ipynb"
 default[:ipynb][:linux_group] = "ipynb"
 
 # Home directory for the system user
-default[:ipynb][:home_dir] = File.join("/home/", default[:ipynb][:linux_user])
+default[:ipynb][:home_dir] = nil #File.join("/home/", default[:ipynb][:linux_user])
 
 # Spot to store the notebook files
-default[:ipynb][:notebook_dir] = File.join(default[:ipynb][:home_dir],
-                                           "notebooks")
+default[:ipynb][:notebook_dir] = nil #File.join(default[:ipynb][:home_dir],
+                                     #      "notebooks")
 
 default[:supervisor][:version] = "3.0"
 
@@ -26,11 +26,6 @@ default[:ipynb][:service_name] = "ipynb"
 
 # IPython profile
 default[:ipynb][:profile_name] = "cooked"
-
-# IPython directory for settings
-default[:ipynb][:ipython_settings_dir] = File.join(default[:ipynb][:home_dir],
-                                                   ".ipython")
-
 
 default[:ipynb][:proxy][:enable] = true
 default[:ipynb][:proxy][:hostname] = fqdn
@@ -116,7 +111,7 @@ default[:ipynb][:NotebookApp][:webapp_settings][:static_url_prefix] = nil
 ################################################################################
 
 # Where to store the virtual environment IPython runs in
-default[:ipynb][:virtenv] = File.join(default[:ipynb][:home_dir], ".ipyvirt")
+default[:ipynb][:virtenv] = nil #File.join(default[:ipynb][:home_dir], ".ipyvirt")
 
 # Version of Python to use
 default[:ipynb][:py_version] = "python2.7"
@@ -145,44 +140,38 @@ default[:ipynb][:system_packages] = %w{
 # The scientific computing stack, installed in order
 # Note that numpy must be first and the dependencies for matplotlib also have
 # to start first due to the way numpy+matplotlib are packaged
-default[:ipynb][:scientific_stack] = ["numpy",
-                                      "freetype-py",
-                                      "pillow",
-                                      "scipy==0.12.1",
+default[:ipynb][:scientific_stack] = ["numpy==1.8.0",
+                                      "freetype-py==0.4.1",
+                                      "pillow==2.3.0",
+                                      "scipy==0.13.2",
                                       "python-dateutil",
                                       "pytz==2013b",
-                                      "six",
-                                      "scikit-learn",
-                                      "pandas",
-                                      "matplotlib",
-                                      "pygments",
-                                      "readline",
-                                      "nose",
-                                      "pexpect",
-                                      "cython",
-                                      "networkx",
-                                      "numexpr",
-                                      "tables",
-                                      "patsy",
-                                      "statsmodels",
-                                      "sympy",
-                                      "scikit-image",
-                                      "h5py",
-                                      "nltk",
-                                      "theano",
-                                      "xlrd",
-                                      "xlwt"
+                                      "six==1.5.2",
+                                      "scikit-learn==0.14.1",
+                                      "pandas==0.12.0",
+                                      "matplotlib==1.3.1",
+                                      "pygments==1.6",
+                                      "readline==6.2.4.1",
+                                      "nose==1.3.0",
+                                      "pexpect==3.0",
+                                      "cython==0.19.2",
+                                      "networkx==1.8.1",
+                                      "numexpr==2.2.2",
+                                      "tables==3.0.0",
+                                      "patsy==0.2.1",
+                                      "statsmodels==0.5.0",
+                                      "sympy==0.7.4.1",
+                                      "scikit-image==0.9.3",
+                                      "h5py==2.2.1",
+                                      "nltk==2.0.4",
+                                      "theano==0.6.0",
+                                      "xlrd==0.9.2",
+                                      "xlwt==0.7.5"
                                      ]
 
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)
 # Most of the attributes, configuration, etc. rely on IPython 1.0 so be wary if for some reason you want to use 0.x releases.
-default[:ipynb][:ipython_package] = "ipython"
-
-# All the dependencies for IPython + IPython notebook
-default[:ipynb][:ipython_deps] = ["tornado==3.1",
-                                  "pyzmq",
-                                  "jinja2"
-]
+default[:ipynb][:ipython_package] = "ipython[notebook]==1.1.0"
 
 # Additional packages to install into the same virtualenv as the IPython notebook
 default[:ipynb][:extra_packages] = []

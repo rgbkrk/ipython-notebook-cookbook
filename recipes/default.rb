@@ -8,6 +8,20 @@
 
 include_recipe "python"
 
+# Unless the paths got overridden, we set them up here
+if node[:ipynb][:home_dir].nil? || node[:ipynb][:home_dir].empty?
+    node.set[:ipynb][:home_dir] = File.join("/home/", node[:ipynb][:linux_user])
+end
+
+if node[:ipynb][:notebook_dir].nil? || node[:ipynb][:notebook_dir].empty?
+    node.set[:ipynb][:notebook_dir] = File.join(node[:ipynb][:home_dir],
+                                            "notebooks")
+end
+
+if node[:ipynb][:virtenv].nil? || node[:ipynb][:virtenv].empty?
+    node.set[:ipynb][:virtenv] = File.join(node[:ipynb][:home_dir], ".ipyvirt")
+end
+
 # Make the package manager handle an initial install so that we
 # have system dependencies, whether we run IPython from site-packages or a
 # virtualenv.
@@ -51,16 +65,6 @@ end
 
 # Install the entire scientific computing stack
 node[:ipynb][:scientific_stack].each do |pkg|
-   python_pip pkg do
-      virtualenv node[:ipynb][:virtenv]
-      user node[:ipynb][:linux_user]
-      group node[:ipynb][:linux_group]
-      action :install
-   end
-end
-
-# IPython notebook dependencies
-node[:ipynb][:ipython_deps].each do |pkg|
    python_pip pkg do
       virtualenv node[:ipynb][:virtenv]
       user node[:ipynb][:linux_user]
