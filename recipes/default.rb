@@ -59,16 +59,6 @@ node[:ipynb][:scientific_stack].each do |pkg|
    end
 end
 
-# IPython notebook dependencies
-node[:ipynb][:ipython_deps].each do |pkg|
-   python_pip pkg do
-      virtualenv node[:ipynb][:virtenv]
-      user node[:ipynb][:linux_user]
-      group node[:ipynb][:linux_group]
-      action :install
-   end
-end
-
 # IPython proper
 python_pip node[:ipynb][:ipython_package] do
    virtualenv node[:ipynb][:virtenv]
