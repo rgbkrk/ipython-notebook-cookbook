@@ -121,17 +121,32 @@ default[:ipynb][:py_version] = "python2.7"
 ################################################################################
 
 # System packages, at least for Ubuntu (naming may change)
-default[:ipynb][:system_packages] = %w{
-   build-essential libcurl4-openssl-dev libssl-dev zlib1g-dev libpcre3-dev
-   gfortran libblas-dev libblas3gf liblapack3gf liblapack-dev libncurses5-dev
-   libatlas-dev libatlas-base-dev libscalapack-mpi1 libscalapack-pvm1
-   liblcms-utils python-imaging-doc python-imaging-dbg
-   libamd2.2.0 libjpeg-turbo8 libjpeg8 liblcms1 libumfpack5.4.0 python-imaging
-   libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
-   libcurl4-gnutls-dev python-pycurl-dbg git-core
-   cython libhdf5-7 libhdf5-serial-dev
-   python-egenix-mxdatetime vim python-numpy python-scipy pandoc
-}
+case node['platform_version']
+when '14.04'
+  default[:ipynb][:system_packages] = %w(
+    build-essential libcurl4-openssl-dev libssl-dev zlib1g-dev libpcre3-dev
+    gfortran libblas-dev libblas3gf liblapack3gf liblapack-dev libncurses5-dev
+    libatlas-dev libatlas-base-dev libscalapack-mpi1 libscalapack-pvm1
+    liblcms-utils python-imaging-doc python-imaging-dbg
+    libamd2.3.1 libjpeg-turbo8 libjpeg8 liblcms1 libumfpack5.6.2 python-imaging
+    libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
+    libcurl4-gnutls-dev python-pycurl-dbg git-core
+    cython libhdf5-7 libhdf5-serial-dev
+    python-egenix-mxdatetime vim python-numpy python-scipy pandoc
+  )
+else
+  default[:ipynb][:system_packages] = %w(
+    build-essential libcurl4-openssl-dev libssl-dev zlib1g-dev libpcre3-dev
+    gfortran libblas-dev libblas3gf liblapack3gf liblapack-dev libncurses5-dev
+    libatlas-dev libatlas-base-dev libscalapack-mpi1 libscalapack-pvm1
+    liblcms-utils python-imaging-doc python-imaging-dbg
+    libamd2.2.0 libjpeg-turbo8 libjpeg8 liblcms1 libumfpack5.4.0 python-imaging
+    libpng12-0 libpng12-dev libfreetype6 libfreetype6-dev
+    libcurl4-gnutls-dev python-pycurl-dbg git-core
+    cython libhdf5-7 libhdf5-serial-dev
+    python-egenix-mxdatetime vim python-numpy python-scipy pandoc
+  )
+end
 
 ################################################################################
 # Software Stack (pip installs)
@@ -174,4 +189,3 @@ default[:ipynb][:ipython_package] = "ipython[notebook]==1.1.0"
 
 # Additional packages to install into the same virtualenv as the IPython notebook
 default[:ipynb][:extra_packages] = []
-
