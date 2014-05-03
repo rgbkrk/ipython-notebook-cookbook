@@ -7,15 +7,15 @@ Vagrant.configure("2") do |config|
   config.vm.define :IPyBox
 
   config.vm.provider "virtualbox" do |ipybox|
-     ipybox.name = "IPyBox"
+    ipybox.name = "IPyBox"
   end
 
   config.vm.hostname = "ipynb-cookbook-berkshelf"
 
-  config.omnibus.chef_version = "11.6.0"
+  config.omnibus.chef_version = "11.12.4"
 
-  config.vm.box = "opscode-ubuntu-13.04"
-  config.vm.box_url = "https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box"
+  config.vm.box = "ubuntu-13.10"
+  config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_#{config.vm.box}_chef-provisionerless.box"
 
   # Forward the default 8888 port for the IPython notebook,
   # keeping the port different on the host box in case the user
