@@ -11,3 +11,5 @@ depends "yum", "~> 2.3.0"
 depends "apt", "~> 2.0.0"
 depends "supervisor", "~> 0.4.5"
 depends "nginx", "~> 1.7.0"
+
+supports 'ubuntu'
