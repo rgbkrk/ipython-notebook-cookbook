@@ -185,7 +185,7 @@ default[:ipynb][:scientific_stack] = ["numpy==1.8.0",
 
 # Let users configure exactly what version of IPython they are going to pull (from git, PyPI, etc.)
 # Most of the attributes, configuration, etc. rely on IPython 1.0 so be wary if for some reason you want to use 0.x releases.
-default[:ipynb][:ipython_package] = "ipython[notebook]==2.0.0"
+default[:ipynb][:ipython_package] = "ipython[notebook]==2.1.0"
 
 # Additional packages to install into the same virtualenv as the IPython notebook
 default[:ipynb][:extra_packages] = []
