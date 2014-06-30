@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.hostname = "ipynb-cookbook-berkshelf"
 
-  config.omnibus.chef_version = "11.12.4"
+  config.omnibus.chef_version = "11.12.8"
 
   config.vm.box = "ubuntu-14.04"
   config.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_#{config.vm.box}_chef-provisionerless.box"
