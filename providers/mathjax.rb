@@ -39,9 +39,8 @@ def install_mathjax(install_dir, ipython_path, owner)
 
        code <<-EOH
 from IPython.external.mathjax import install_mathjax
-install_mathjax(replace=True, dest='#{install_dir}')
+install_mathjax(tag='2.2.0', replace=True, dest='#{install_dir}')
        EOH
    end
 
 end
-
