@@ -177,7 +177,6 @@ default[:ipynb][:scientific_stack] = ["numpy==1.8.0",
                                       "statsmodels==0.5.0",
                                       "sympy==0.7.4.1",
                                       "scikit-image==0.9.3",
-                                      "nltk==2.0.4",
                                       "theano==0.6.0",
                                       "xlrd==0.9.2",
                                       "xlwt==0.7.5"
