@@ -106,6 +106,12 @@ default[:ipynb][:NotebookApp][:base_project_url] = nil
 default[:ipynb][:NotebookApp][:base_kernel_url] = nil
 default[:ipynb][:NotebookApp][:webapp_settings][:static_url_prefix] = nil
 
+
+# Any additional configuration for Notebooks, to complete
+# ipython_notebook_config.py ruby template
+default[:ipynb][:NotebookApp][:additional_config] = nil
+
+
 ################################################################################
 # Virtualenv
 ################################################################################
