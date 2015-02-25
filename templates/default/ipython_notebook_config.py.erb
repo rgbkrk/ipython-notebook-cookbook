@@ -60,3 +60,11 @@ c.NotebookApp.password = '<%= node[:ipynb][:NotebookApp][:password_hash] %>'
 <% end %>
 
 c.NotebookApp.webapp_settings = {'static_url_prefix':'/static/'}
+
+#
+# Adding whatever content you feel like to the notebook config file. You
+# have to make sure it does not interfere with parameters already covered
+# in ipython_notebook_config.py ruby template.
+#
+
+<%= node[:ipynb][:NotebookApp][:additional_config] %>
