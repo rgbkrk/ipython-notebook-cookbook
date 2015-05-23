@@ -23,6 +23,11 @@ c.IPKernelApp.pylab = '<%= node[:ipynb][:NotebookApp][:pylab] %>'
 <% unless node[:ipynb][:proxy][:enable] %>
     <% unless node[:ipynb][:NotebookApp][:certfile].nil? %>
 
+# Set notebook home directory
+c.NotebookApp.notebook_dir = <%= node[:ipynb][:notebook_dir] %>
+<% end %>
+<% unless node[:ipynb][:notebook_dir].nil? %>
+
 # SSL Certificate
 c.NotebookApp.certfile = '<%= node[:ipynb][:NotebookApp][:certfile] %>'
     <% end %>
