@@ -20,13 +20,14 @@ c = get_config()
 # Choices: ['tk', 'qt', 'wx', 'gtk', 'osx', 'inline', 'auto']
 c.IPKernelApp.pylab = '<%= node['ipynb']['NotebookApp']['pylab'] %>'
 <% end %>
-<% unless node['ipynb']['proxy']['enable'] %>
-    <% unless node['ipynb']['NotebookApp']['certfile'].nil? %>
 
+<% unless node['ipynb']['notebook_dir'].nil? %>
 # Set notebook home directory
 c.NotebookApp.notebook_dir = <%= node['ipynb']['notebook_dir'] %>
 <% end %>
-<% unless node['ipynb']['notebook_dir'].nil? %>
+
+<% unless node['ipynb']['proxy']['enable'] %>
+    <% unless node['ipynb']['NotebookApp']['certfile'].nil? %>
 
 # SSL Certificate
 c.NotebookApp.certfile = '<%= node['ipynb']['NotebookApp']['certfile'] %>'
