@@ -23,7 +23,7 @@ c.IPKernelApp.pylab = '<%= node['ipynb']['NotebookApp']['pylab'] %>'
 
 <% unless node['ipynb']['notebook_dir'].nil? %>
 # Set notebook home directory
-c.NotebookApp.notebook_dir = <%= node['ipynb']['notebook_dir'] %>
+c.FileNotebookManager.notebook_dir = u'<%= node['ipynb']['notebook_dir'] %>'
 <% end %>
 
 <% unless node['ipynb']['proxy']['enable'] %>
