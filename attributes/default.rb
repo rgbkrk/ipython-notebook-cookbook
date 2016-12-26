@@ -120,7 +120,8 @@ default[:ipynb][:NotebookApp][:additional_config] = nil
 default[:ipynb][:virtenv] = nil #File.join(default[:ipynb][:home_dir], ".ipyvirt")
 
 # Version of Python to use
-default[:ipynb][:py_version] = "python2.7"
+default[:ipynb][:py_version] = "python3.5"
+default[:ipynb][:py_version] = "python2.7" if node['platform_version'] == '16.04'
 
 ################################################################################
 # Software Stack (system packages)
@@ -128,6 +129,16 @@ default[:ipynb][:py_version] = "python2.7"
 
 # System packages, at least for Ubuntu (naming may change)
 case node['platform_version']
+when '16.04'
+  default[:ipynb][:system_packages] = %w(
+    build-essential libcurl4-openssl-dev libssl-dev zlib1g-dev libpcre3-dev
+    gfortran libblas-dev liblapack-dev libncurses5-dev libatlas-base-dev 
+    libscalapack-openmpi1 libscalapack-pvm1  python-pil-doc python-pil-dbg  
+    libjpeg-turbo8 libjpeg8 python-imaging  libpng12-0 libpng12-dev 
+    libfreetype6 libfreetype6-dev  python-pycurl-dbg git-core 
+    cython libhdf5-serial-dev python-egenix-mxdatetime vim python-numpy 
+    python-scipy pandoc
+)
 when '14.04'
   default[:ipynb][:system_packages] = %w(
     build-essential libcurl4-openssl-dev libssl-dev zlib1g-dev libpcre3-dev
