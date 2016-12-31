@@ -1,0 +1,61 @@
+--- 
+driver: 
+  name: vagrant
+  network:
+    - ["private_network", ip: "33.33.33.10"]
+    - ["forwarded_port", {guest: 8888, host: 9999}]
+platforms: 
+  - name: ubuntu-16.04
+  - name: ubuntu-14.04
+provisioner: 
+  name: chef_zero
+suites: 
+  - attributes: 
+      ipynb:
+        NotebookApp: 
+          password: test
+        scientific_stack: []
+        ssl_certificate: /etc/nginx/ssl.pem
+        ssl_certificate_key: /etc/nginx/ssl.key
+        ssl_certificate_key_text: |-
+            -----BEGIN RSA PRIVATE KEY-----
+            MIICXQIBAAKBgQDKDv8EmwzlrhoN7XknVNDyZFMC3eQl60fSrNgjYjMojMmNlrRx
+            p770h5Y9dosEuQXuXMbYyvyQpQemDWiQEt6rkGhOB5lZ9NheWn6nnW+9YBbtwkqz
+            ZuAoq6asuvH4faXivg6d8Qxt0xa+g3vFUNVzKBLoRziYFN4NEO+gxrXbXwIDAQAB
+            AoGBAIJMhVtc+UYrrZWJq/UXFt8YnwdcO8HQJbLPz1mR+9eMYnUx2A7q05Mw1Euy
+            ZBeZkR+TKI+o5pIIOhR01RcDdB8dPtoVCgiDSyb/kzhqnEvY/8IvvHdvGQU2V5q3
+            6NVISp/SIRUuFxoTuPq5tF0cvPYSp4U+BBFavnXwe1y9KUSxAkEA6gs2rDyMVU7K
+            0yY+pzWM6/OdNKPWYRCBeCRxo1d2k4xlkoPOq8xVm5+RyNq9NBGWkUSROz6zOuwH
+            swExKq3sswJBAN0DoHMks6o/vw2Z86FJEEffWuDXRHZeMfgaug8vuDHLzrkZcUzb
+            WJcbNTF1H1FeF3ITevt98CZOhrZHCXcwhKUCQQDorCc5SaR1trQ7AB1vW/RyKimS
+            SIL60k70Ir76lRwkCYJ9Cx5ueuBsq1FibduFJSsb1h/P10CVhksNMVUwyeGzAkA9
+            YVl5QPMo0CVmSKBR5bHA1DYwBXj9CrID/qA3wX/9TGXwIDHIL47OAH9oaee1uFT4
+            mJJqMBK3AM4G53mogXAFAkBSpcRbCXlWBUJjGiE9qrpaqrDhncNhMA5zqxkxmGEF
+            WfBxaOjp9wsQZZHX+bSQLp92WjW0Uq712dtL7CVOWqxb
+            -----END RSA PRIVATE KEY-----
+        ssl_certificate_text: |-
+            -----BEGIN CERTIFICATE-----
+            MIICmDCCAgGgAwIBAgIJAONj1DIGs9lkMA0GCSqGSIb3DQEBBQUAMD0xCzAJBgNV
+            BAYTAlVTMQswCQYDVQQIEwJUWDEhMB8GA1UEChMYSW50ZXJuZXQgV2lkZ2l0cyBQ
+            dHkgTHRkMB4XDTEzMDgxOTIwNDE0NloXDTE0MDgxOTIwNDE0NlowPTELMAkGA1UE
+            BhMCVVMxCzAJBgNVBAgTAlRYMSEwHwYDVQQKExhJbnRlcm5ldCBXaWRnaXRzIFB0
+            eSBMdGQwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMoO/wSbDOWuGg3teSdU
+            0PJkUwLd5CXrR9Ks2CNiMyiMyY2WtHGnvvSHlj12iwS5Be5cxtjK/JClB6YNaJAS
+            3quQaE4HmVn02F5afqedb71gFu3CSrNm4Cirpqy68fh9peK+Dp3xDG3TFr6De8VQ
+            1XMoEuhHOJgU3g0Q76DGtdtfAgMBAAGjgZ8wgZwwHQYDVR0OBBYEFKJEzyGWKl47
+            WecMx/gocolKLN1IMG0GA1UdIwRmMGSAFKJEzyGWKl47WecMx/gocolKLN1IoUGk
+            PzA9MQswCQYDVQQGEwJVUzELMAkGA1UECBMCVFgxITAfBgNVBAoTGEludGVybmV0
+            IFdpZGdpdHMgUHR5IEx0ZIIJAONj1DIGs9lkMAwGA1UdEwQFMAMBAf8wDQYJKoZI
+            hvcNAQEFBQADgYEAUxagzwBN/fCJlKh1eIdO/oWBqtt9Ca70VSylD0WJrtgznreG
+            fZJ4bEzYsCAsWcQowSmEkzQeXzB60EUT3I09SbyFe7+JD+/CGiBfET42ABGwGNUV
+            dE3w7J7Coc46rYXAqMg05hBYrOe43nra2RHTFxQr5V+oDLMcZuPI2Ozo4e4=
+            -----END CERTIFICATE-----
+    name: default
+    run_list: 
+      - "recipe[apt]"
+      - "recipe[yum]"
+      - "recipe[ipynb::default]"
+      - "recipe[ipynb::virtenv_launch]"
+      - "recipe[ipynb::proxy]"
+    verifier: 
+      name: inspec

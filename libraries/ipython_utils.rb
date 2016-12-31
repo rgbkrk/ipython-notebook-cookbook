@@ -5,14 +5,12 @@ require 'digest'
 require 'securerandom'
 
 module IPythonAuth
-   def IPythonAuth.ipython_hash(password)
+  def self.ipython_hash(password)
+    hash_alg = Digest::SHA512
+    hash_name = 'sha512'
 
-      hash_alg = Digest::SHA512
-      hash_name = 'sha512'
-
-      salt = SecureRandom.hex(6)
-      password_hash = hash_alg.hexdigest(password + salt)
-      return [hash_name, salt, password_hash].join(":")
-   end
+    salt = SecureRandom.hex(6)
+    password_hash = hash_alg.hexdigest(password + salt)
+    [hash_name, salt, password_hash].join(':')
+  end
 end
-
