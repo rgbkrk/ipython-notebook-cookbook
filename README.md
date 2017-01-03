@@ -2,35 +2,31 @@
 
 Sets up an IPython Notebook server using Chef.
 
-This cookbook targets IPython 1.0.0 and will not deploy 0.x releases.
+This cookbook targets Jupyter/IPython 4.x environment.
+
+CAUTION: This cookbook now (Jan, 2017) defaults to using Jupyter and IPython versus the old 
+monolithic IPython stack. While testing has been performed, if you are dependent on the 
+old behavior, you should use the V1.1.1 tagged release of this cookbook.
 
 # Requirements
 
-This cookbook uses Chef 11. Additionally, Berkshelf is recommended but not required.
-
-## Requirements for Vagrant
-
- * [Berkshelf][]: `gem install berks`
- * [Vagrant][] 1.2.4 or higher
- * Berkshelf plugin for Vagrant: `vagrant plugin install vagrant-berkshelf`
- * Omnibus plugin for Vagrant: `vagrant plugin install vagrant-omnibus`
+This cookbook uses Chef 12.1+.
 
 # Usage
 
 ## Include this cookbook
 
-This cookbook isn't on opscode (yet), so for now you'll have to use Berkshelf and point to it in your Berksfile
+This cookbook isn't on supermarket (yet), so for now you'll have to use Berkshelf and point to it in your Berksfile
 
 ```ruby
-cookbook 'ipynb',
-  :git => 'https://github.com/rgbkrk/ipynb-cookbook'
+cookbook 'ipynb', github: 'rgbkrk/ipynb-cookbook'
 ```
 
 ## Bootstrap VirtualBox
 
-You can also try it out using Vagrant with VirtualBox.
+You can also try it out using test-kitchen.
 
-    vagrant up
+    test-kitchen converge ubuntu-16
 
 Once finished, the IPython notebook can be accessed from your host machine (through port forwarding) on 127.0.0.1:9999.
 
@@ -66,6 +62,16 @@ On a real deployment, these should be set using an encrypted data bag.
 3. Commit your changes (`git commit -am 'Added new provider to ...'`)
 4. Push to the branch (`git push origin feature1`)
 5. Create a new Pull Request
+
+# Future Directions
+
+This cookbook satisfies the needs of the current collaborators. To do items include:
+- Supporting non-Ubuntu platforms (Amazon, Centos, etc.)
+- Support for non-IPython kernels (Rstats)
+- Submission to Supermarket
+- CI testing
+
+Contributions are most welcome!
 
 # Author
 
